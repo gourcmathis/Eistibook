@@ -1,46 +1,47 @@
 <?php
 session_start();
-require("core.php");
+
+//login: protonguil
+//pass: 8vQvim2
+//Bdd: 2018_p0_cpi02_protonguil
+function connecterBDD() {
+
+        $DBconn = mysqli_connect("127.0.0.1","protonguil", "8vQvim2" , "2018_p0_cpi02_protonguil");
+        if (!$DBconn) {
+            die("Erreur: " . mysqli_connect_error());
+        }
+
+        return $DBconn;
+    }
+
+function deconnecterBDD($DBconn) {
+        if (isset($DBconn)) {
+            mysqli_close($DBconn);
+        }
+    }
 
 
+function getListeEleves() {
 
-function getListeAbonnes() {
-
-	$lstAbonnes = [];
-
-//	$lstAbonnes = [
-//	['prenom'=>'Prenom1', 'nom'=>'Nom1'],
-//	['prenom'=>'Prenom2', 'nom'=>'Nom2'],
-//	['prenom'=>'Prenom3', 'nom'=>'Nom3']
-//	];
-	//paramètres = serveur, user, password
-	$db = connecterBDD("127.0.0.1", "chatryroxa", "V84mC47");
-
-	//TODO Générer le contenu de la variable $tab en fonction des données présentes dans la BDD
-//	$servername = "localhost";
-//	$username = "erc";
-//	$password = "7uN$3kREt";
-//	$dbname = "2017_database_erc";
-
+	$lstEleves = [];
+	$db = connecterBDD();
 	$query = "SELECT nom, prenom FROM Abonnes";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if (mysqli_num_rows($res) > 0) {
 		$i=0;
 		while($row = mysqli_fetch_assoc($res)) {
-			$lstAbonnes[$i]= array('prenom'=>$row['prenom'], 'nom'=>$row['nom']) ;
+			$lstEleves[$i]= array('prenom'=>$row['prenom'], 'nom'=>$row['nom']) ;
 			$i++;
 		}
 	} else {
     		echo "No results";
     	}
-
-
 	deconnecterBDD($db);
-	return $lstAbonnes;
+	return $lstEleves;
 }
 
 
-function insertAbonne($formdata) {
+function insertEleve($formdata) {
 
 	$nom = $formdata['nom'];
 	$prenom = $formdata['prenom'];
@@ -48,9 +49,9 @@ function insertAbonne($formdata) {
 	$email = $formdata['email'];
 	$motDePasse = $formdata['password'];
 
-	$db = connecterBDD("127.0.0.1", "chatryroxa", "V84mC47");
+	$db = connecterBDD();
     
-	$query="INSERT INTO Abonnes (nom,prenom,tel,email,motDePasse) VALUES ('$nom', '$prenom', '$tel', '$email', '$motDePasse')";
+	$query="INSERT INTO ????? (nom,prenom,tel,email,motDePasse) VALUES ('$nom', '$prenom', '$tel', '$email', '$motDePasse')";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if ($res) { 
 		echo "l'inscription a bien été effectuée" ;
@@ -65,12 +66,11 @@ function insertAbonne($formdata) {
 
 function tryLogin($formdata) {
 
-
 	$email = $formdata['email'];
 	$motDePasse = $formdata['password'];
-	$db = connecterBDD("127.0.0.1", "chatryroxa", "V84mC47");
+	$db = connecterBDD();
 	
-	$query = "SELECT email, motDePasse FROM Abonnes";
+	$query = "SELECT email, motDePasse FROM ???? ";
 	
 	$res=mysqli_query($db,$query) or die('Request error : '.$query);
 	
@@ -79,7 +79,7 @@ function tryLogin($formdata) {
 		while ($row = mysqli_fetch_assoc($res)) {
 			if ( $row['email']==$email && $row['motDePasse']==$motDePasse ) {
 				$trouve=true;
-				$req="SELECT * FROM Abonnes WHERE email='".$email."' AND motDePasse='".$motDePasse."'";
+				$req="SELECT * FROM ????? WHERE email='".$email."' AND motDePasse='".$motDePasse."'";
 				$reponse=mysqli_query($db,$req) or die("erreur : ".$req);
 				$donnees=mysqli_fetch_assoc($reponse);
 				$_SESSION['email']=$email;
@@ -101,22 +101,19 @@ function tryLogin($formdata) {
 
 function deleteLogin($username) {
 	$db = connecterBDD("127.0.0.1", "chatryroxa", "V84mC47");
-	$query="DELETE FROM Abonnes WHERE email='$username'";
+	$query="DELETE FROM ????? WHERE email='$username'";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if ($res) { 
 		echo "Votre compte a bien été supprimé." ;
 	} else {
 		echo "Il y a eu une erreur...";
 	}
-	
-	    
 }
 
 
 
 
-
-
+?>
 
 
 

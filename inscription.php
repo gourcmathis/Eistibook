@@ -84,7 +84,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="bouton">Me Connecter</button>
+                            <button type="submit" class="bouton">M'inscrire</button>
                         </div>
                     </div>
                 </form>
@@ -97,33 +97,6 @@
 
 
 
-<div class="section3">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-md-12">
-                <ul >
-                   
-                    <li class="menuli" >
-                        <a class="nonlien" href="inscription.php">Inscription</a>
-                    </li>
-                    <li class="menuli">
-                        <a class="nonlien" href="login.php">Me Connecter</a>
-                    </li>
-
-                    <li class="menuli">
-                        <a class="nonlien" href="login.php?action=logout">Me déconnecter</a>
-                    </li>
-
-                    <li  class="menuli">
-                        <a class="nonlien" href="http://www.eisti.fr">EISTI
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 </body>

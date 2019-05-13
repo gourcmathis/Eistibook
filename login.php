@@ -91,7 +91,7 @@ if (!empty($_SESSION)) {
 		echo "<script>document.location.replace('admin.php');</script>";
 	} else {
 		// ouvrir la page profil
-		echo "<script>document.location.replace('profil.php');</script>";
+		echo "<script>document.location.replace('profil.php?perso='.$_SESSION['login']);</script>";
 	}
 }
 ?>

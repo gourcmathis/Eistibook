@@ -26,7 +26,7 @@
                 <form class="form-horizontal" role="form" action="login.php" method="POST">
                     <div class="form-group">
                         <div class="col-sm-2">
-                            <label for="email" class="control-label">Login (Email)</label>
+                            <label for="email" class="control-label">Login</label>
                         </div>
                         <div class="col-sm-10">
                             <input type="email" class="form-control" id="email" name="email" placeholder="nom@eisti.eu">

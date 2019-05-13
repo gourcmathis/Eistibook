@@ -45,13 +45,12 @@ function insertEleve($formdata) {
 
 	$nom = $formdata['nom'];
 	$prenom = $formdata['prenom'];
-	$tel = $formdata['tel'];
 	$email = $formdata['email'];
 	$motDePasse = $formdata['password'];
 
 	$db = connecterBDD();
     
-	$query="INSERT INTO ????? (nom,prenom,tel,email,motDePasse) VALUES ('$nom', '$prenom', '$tel', '$email', '$motDePasse')";
+	$query="INSERT INTO EISTI_BOOK_UTILISATEUR (NOM,PRENOM,LOGIN,MDP) VALUES ('$nom', '$prenom', '$email', '$motDePasse')";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if ($res) { 
 		echo "l'inscription a bien été effectuée" ;

@@ -25,12 +25,12 @@ function getListeEleves() {
 
 	$lstEleves = [];
 	$db = connecterBDD();
-	$query = "SELECT nom, prenom FROM Abonnes";
+	$query = "SELECT NOM, PRENOM FROM EISTI_BOOK_UTILISATEUR";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if (mysqli_num_rows($res) > 0) {
 		$i=0;
 		while($row = mysqli_fetch_assoc($res)) {
-			$lstEleves[$i]= array('prenom'=>$row['prenom'], 'nom'=>$row['nom']) ;
+			$lstEleves[$i]= array('prenom'=>$row['PRENOM'], 'nom'=>$row['NOM']) ;
 			$i++;
 		}
 	} else {
@@ -45,13 +45,14 @@ function insertEleve($formdata) {
 
 	$nom = $formdata['nom'];
 	$prenom = $formdata['prenom'];
-	$tel = $formdata['tel'];
+	$ddn = $formdata['ddn'];
 	$email = $formdata['email'];
+	$promo = $formdata['promo'];
 	$motDePasse = $formdata['password'];
 
 	$db = connecterBDD();
     
-	$query="INSERT INTO ????? (nom,prenom,tel,email,motDePasse) VALUES ('$nom', '$prenom', '$tel', '$email', '$motDePasse')";
+	$query="INSERT INTO EISTI_BOOK_UTILISATEUR (NOM,PRENOM,LOGIN,MDP,NAISSANCE,PROMOTION) VALUES ('$nom', '$prenom', '$email', '$motDePasse','$ddn', '$promo')";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if ($res) { 
 		echo "l'inscription a bien été effectuée" ;
@@ -70,25 +71,21 @@ function tryLogin($formdata) {
 	$motDePasse = $formdata['password'];
 	$db = connecterBDD();
 	
-	$query = "SELECT email, motDePasse FROM ???? ";
+	$query = "SELECT LOGIN, MDP FROM EISTI_BOOK_UTILISATEUR ";
 	
 	$res=mysqli_query($db,$query) or die('Request error : '.$query);
 	
 	if (mysqli_num_rows($res)>0) {
 		$trouve=false;
 		while ($row = mysqli_fetch_assoc($res)) {
-			if ( $row['email']==$email && $row['motDePasse']==$motDePasse ) {
+			if ( $row['LOGIN']==$email && $row['MDP']==$motDePasse ) {
 				$trouve=true;
-				$req="SELECT * FROM ????? WHERE email='".$email."' AND motDePasse='".$motDePasse."'";
+				$req="SELECT TYPE FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='".$email."' AND MDP='".$motDePasse."'";
 				$reponse=mysqli_query($db,$req) or die("erreur : ".$req);
 				$donnees=mysqli_fetch_assoc($reponse);
-				$_SESSION['email']=$email;
-				$_SESSION['motDePasse']=$motDePasse;
-				$_SESSION['id']=$donnees['id'];
-				$_SESSION['nom']=$donnees['nom'];
-				$_SESSION['prenom']=$donnees['prenom'];
-				$_SESSION['tel']=$donnees['tel'];
-				echo "<p>vous etes enregistre</p>";
+				$_SESSION['login']=$email;
+				$_SESSION['MDP']=$motDePasse;
+				$_SESSION['type']=$donnees['TYPE'];
 			}	
 		}
 		if (!$trouve) {
@@ -96,12 +93,13 @@ function tryLogin($formdata) {
 		}
 	}
 	deconnecterBDD($db);
-
 }
+
+
 
 function deleteLogin($username) {
 	$db = connecterBDD("127.0.0.1", "chatryroxa", "V84mC47");
-	$query="DELETE FROM ????? WHERE email='$username'";
+	$query="DELETE FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$username'";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if ($res) { 
 		echo "Votre compte a bien été supprimé." ;
@@ -109,7 +107,6 @@ function deleteLogin($username) {
 		echo "Il y a eu une erreur...";
 	}
 }
-
 
 
 

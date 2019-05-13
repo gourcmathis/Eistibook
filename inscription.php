@@ -16,6 +16,7 @@
 
 
 
+
 <body>
 
 <?php
@@ -24,11 +25,13 @@ require("util.php");
 //Lors de la soumission des données du formulaire, insérer le nouvel abonné
 if (isset($_POST['nom']) && isset($_POST['prenom'])) {
 $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST['ddn'],'email' => $_POST['email'],'promo' => $_POST['promo'],'password' => $_POST['password']);
+
     insertEleve($tab);
 }
 
 
 ?>
+
 
 <h1 class="titre"> EISTI - BOOK </h1>
 
@@ -38,10 +41,10 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form class="form-horizontal" role="form" action="inscription.php" method="POST">
+                <form class="form-horizontal" role="form" action="login.php" method="POST">
                     <div class="form-group">
                         <div class="col-sm-2">
-                            <label for="nom" class="control-label">Nom</label>
+                            <label for="email" class="control-label">Nom</label>
                         </div>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="nom" name="nom" placeholder="Dupont">
@@ -49,10 +52,11 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
                     </div>
                     <div class="form-group">
                         <div class="col-sm-2">
-                            <label for="prenom" class="control-label">Prénom</label>
+                            <label for="password" class="control-label">Prénom</label>
                         </div>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Jean">
+
                         </div>
                     </div>
 
@@ -112,6 +116,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
 
 
 
+
 <div class="section3">
     <div class="container">
 
@@ -131,7 +136,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
                     </li>
 
                     <li  class="menuli">
-                        <a class="nonlien" href="http://www.eisti.fr">EISTI
+                        <a class="nonlien" href="http://www.eisti.fr">EISTI</a>
                     </li>
 
                 </ul>
@@ -139,6 +144,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
         </div>
     </div>
 </div>
+
 
 
 </body>

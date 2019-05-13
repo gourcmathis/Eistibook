@@ -51,7 +51,7 @@ function insertEleve($formdata) {
 	$motDePasse = $formdata['password'];
 
 	$db = connecterBDD();
-    
+   
 	$query="INSERT INTO EISTI_BOOK_UTILISATEUR (NOM,PRENOM,LOGIN,MDP,NAISSANCE,PROMOTION) VALUES ('$nom', '$prenom', '$email', '$motDePasse','$ddn', '$promo')";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if ($res) { 

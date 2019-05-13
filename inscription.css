@@ -9,6 +9,16 @@ body{
 	font-family: 'URW Chancery L', cursive;
 	font-size: 40px;
 }
+
+.soustitre {
+	color: black;
+	margin-left: 40%;
+	font-family: 'URW Chancery L', cursive;
+	font-size: 30px;
+	
+
+	}
+
 .menuli {
 	display:inline;
  	list-style-type:none;

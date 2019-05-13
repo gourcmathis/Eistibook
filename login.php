@@ -3,13 +3,6 @@
 <head lang="fr">
     <meta charset="UTF-8">
     <title>EISTI - BOOK </title>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-          rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-          rel="stylesheet" type="text/css"> -->
            <link href="./login.css"
           rel="stylesheet" type="text/css">
 </head>
@@ -17,6 +10,14 @@
 <body>
 <h1 class="titre"> EISTI - BOOK </h1>
 
+<?php
+require("util.php");
+
+//on regarde si un formulaire a déjà été envoyé. si oui ne teste la connection avec les identifiants donnés
+if (!empty($_POST)){
+	tryLogin($_POST);
+}
+?>
 
 
 <div class="section2">
@@ -69,10 +70,6 @@
                         <a class="nonlien" href="login.php">Me Connecter</a>
                     </li>
 
-                    <li class="menuli">
-                        <a class="nonlien" href="login.php?action=logout">Me déconnecter</a>
-                    </li>
-
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr">EISTI
                     </li>
@@ -83,6 +80,21 @@
     </div>
 </div>
 
+<?php
+
+//Afficher les boutons si bien identifié
+if (!empty($_SESSION)) {
+	// si l'utilisateur a été identifié
+	// on regarde quel type d'utilisateur c'est 
+	if ($_SESSION['type']=='admin') {
+		//ouvrir une des pages admin
+		echo "<script>document.location.replace('admin.php');</script>";
+	} else {
+		// ouvrir la page profil
+		echo "<script>document.location.replace('profil.php');</script>";
+	}
+}
+?>
 
 </body>
 </html>

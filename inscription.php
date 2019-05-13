@@ -14,6 +14,18 @@
           rel="stylesheet" type="text/css">
 </head>
 
+<?php
+require("util.php");
+
+//Lors de la soumission des données du formulaire, insérer le nouvel abonné
+if (isset($_POST['nom']) && isset($_POST['prenom'])) {
+$tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'email' => $_POST['email'],'password' => $_POST['password']);
+    insertEleve($tab);
+}
+
+
+?>
+
 <body>
 <h1 class="titre"> EISTI - BOOK </h1>
 

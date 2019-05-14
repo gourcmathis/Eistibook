@@ -47,7 +47,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
                             <label for="email" class="control-label">Nom</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nom" name="nom" placeholder="Dupont">
+                            <input type="text" class="form-control" id="nom" name="nom" placeholder="Dupont" required="required">
                         </div>
                     </div>
                     <div class="form-group">
@@ -55,7 +55,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
                             <label for="password" class="control-label">Prénom</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Jean">
+                            <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Jean" required="required">
 
                         </div>
                     </div>
@@ -65,7 +65,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
                             <label for="ddn" class="control-label">Date de naissance</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" id="ddn" name="ddn" placeholder="02/07/1998">
+                            <input type="date" class="form-control" id="ddn" name="ddn" placeholder="02/07/1998" required="required" >
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
                             <label for="email" class="control-label">Adresse email </label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="bernedohug@eisti.eu">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="bernedohug@eisti.eu" required="required">
                         </div>
                     </div>
 
@@ -83,7 +83,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
                             <label for="promo" class="control-label">Année de promotion</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="promo" name="promo" placeholder="2022">
+                            <input type="number" class="form-control" id="promo" name="promo" placeholder="2022" required="required" >
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
                             <label for="password" class="control-label">Mot de passe </label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="coucoujesuislemotdepasse">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="coucoujesuislemotdepasse" required="required" >
                         </div>
                     </div>
                   

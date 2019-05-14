@@ -18,6 +18,9 @@ body{
 	
 
 	}
+[required] {
+   border: 2px dotted orange;
+}
 
 .menuli {
 	display:inline;

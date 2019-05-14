@@ -98,7 +98,7 @@ function tryLogin($formdata) {
 
 
 function deleteLogin($username) {
-	$db = connecterBDD("127.0.0.1", "chatryroxa", "V84mC47");
+	$db = connecterBDD();
 	$query="DELETE FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$username'";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if ($res) { 
@@ -106,9 +106,30 @@ function deleteLogin($username) {
 	} else {
 		echo "Il y a eu une erreur...";
 	}
+	deconnecterBDD($db);
 }
 
 
+// regarde si util1 et util2 sont amis 
+// paramètres : les 2 logins,
+// retourne un booléen
+function amis($util1,$util2) {
+	$db = connecterBDD();
+	// on selectionne tous les amis de util1
+	$query="SELECT LOGIN FROM EISTI_BOOK_UTILISATEUR WHERE ID-UTILISATEURS IN (SELECT ID_AMIS FROM AMIS WHERE ID_UTILISATEURS=(SELECT ID-UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$util1'));";
+	$res = mysqli_query($db, $query) or die('Request error : '.$query);
+	// puis on regarde si util2 en fait partie
+	$amis=false;
+	if (mysqli_num_rows($res)>0) {
+		while ($row = mysqli_fetch_assoc($res)) {
+			if ( $row["LOGIN"]==$util2 ) {
+				$amis=true;
+			}
+		}
+	}
+	deconnecterBDD($db);	
+	return($amis);
+}
 
 ?>
 

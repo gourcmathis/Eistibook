@@ -1,6 +1,8 @@
 body{
 	/* background: linear-gradient(to top right, #99ccff 0%, #ffffff 100%);*/
 	 background-color: #99ccff;
+	 font-family: Times, 'Times New Roman', serif;
+
 }
 
 .titre {
@@ -54,4 +56,8 @@ body{
  .section3 {
  	margin-top: 25%;
  	margin-left: 27%;
+ }
+
+ .section4 {
+ 	margin-left: 35%;
  }

@@ -4,11 +4,13 @@ body{
 	 font-family: Times, 'Times New Roman', serif;
 
 }
-
+.logo {
+	width: 150px;
+}
 .titre {
 	color: blue;
 	margin-left: 40%;
-	font-family: 'URW Chancery L', cursive;
+	/*font-family: 'URW Chancery L', cursive;*/
 	font-size: 40px;
 }
 .menuli {

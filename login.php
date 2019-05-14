@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<img class="logo" src="./EISTIB5.png">
 <h1 class="titre"> EISTI - BOOK </h1>
 
 <?php

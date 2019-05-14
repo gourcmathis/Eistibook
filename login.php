@@ -82,7 +82,7 @@ if (!empty($_POST)){
 
 <?php
 
-//Afficher les boutons si bien identifié
+//redirection vers la page correspondante si bien identifié
 if (!empty($_SESSION)) {
 	// si l'utilisateur a été identifié
 	// on regarde quel type d'utilisateur c'est 
@@ -91,7 +91,9 @@ if (!empty($_SESSION)) {
 		echo "<script>document.location.replace('admin.php');</script>";
 	} else {
 		// ouvrir la page profil
-		echo "<script>document.location.replace('profil.php?perso='.$_SESSION['login']);</script>";
+		$perso=$_SESSION['login'];
+		echo $perso;
+		echo "<script>document.location.replace('profil.php?perso=".$perso."')</script>";
 	}
 }
 ?>

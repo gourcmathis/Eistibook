@@ -30,6 +30,11 @@
                     <li class="menuli" >
                         <a class="nonlien" href="inscription.php"> Fil d'actualité </a>
                     </li>
+
+                    <li class="menuli">
+                        <a class="nonlien" href="login.php?action=logout">Messagerie</a>
+                    </li>
+
                     <li class="menuli">
                         <a class="nonlien" href="login.php">Paramètres de mon profil </a>
                     </li>
@@ -38,6 +43,7 @@
                         <a class="nonlien" href="login.php?action=logout">Me déconnecter</a>
                     </li>
 
+                    
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr">EISTI </a>
                     </li>

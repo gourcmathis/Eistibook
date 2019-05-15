@@ -198,6 +198,7 @@ function chargerInfos($login) {
 	return array($tableau,$caract,$comp,$langues,$outils);
 } 
 
+// récupère le nom prénom et photo de tous les amis du profil donné
 function chargerListeAmis($login) {
 	$db = connecterBDD();
 	// on selectionne tous les amis de login (c'est à dire les personnes avec qui il est amis et pas ceux qui sont amis avec lui)
@@ -212,6 +213,22 @@ function chargerListeAmis($login) {
 		return $tableau;
 	}
 }
+
+// affiche sur la page de profil les infos des amis à partir de la liste d'amis
+function affichageAmisProfil($liste) {
+	foreach ($liste as $ami) {
+		echo "<div class='ami'>";
+		if (isset($ami['photo'])) {
+			$src=$ami['photo'];
+			echo "<p><img class='photoprofil' src='".$src."'></img></p>";
+		} else {
+			echo "<p><img class='photoprofil' src='poulet.jpg'></img></p>";
+		}
+		echo "<h4> ".$ami['NOM']." ".$ami['PRENOM']." </h4></div>";
+	}
+}
+
+
 
 ?>
 

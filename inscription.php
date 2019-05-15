@@ -10,8 +10,11 @@
           rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css"> -->
+          <link href="./base.css"
+          rel="stylesheet" type="text/css">
            <link href="./inscription.css"
           rel="stylesheet" type="text/css">
+          
 </head>
 
 
@@ -33,8 +36,10 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
 ?>
 
 
-<h1 class="titre"> EISTI - BOOK </h1>
+<!-- <h1 class="titre"> EISTI - BOOK </h1> -->
 
+
+<img class="logo" src="EISTIB6.png">
 
 <h2 class="soustitre"> Formulaire d'inscription </h2>
 <div class="section2">

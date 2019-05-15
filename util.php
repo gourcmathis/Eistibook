@@ -196,7 +196,22 @@ function chargerInfos($login) {
 	
 	deconnecterBDD($db);
 	return array($tableau,$caract,$comp,$langues,$outils);
+} 
 
+function chargerListeAmis($login) {
+	$db = connecterBDD();
+	// on selectionne tous les amis de login (c'est à dire les personnes avec qui il est amis et pas ceux qui sont amis avec lui)
+	$query="SELECT LOGIN, NOM, PRENOM, PHOTO FROM EISTI_BOOK_UTILISATEUR e WHERE e.ID_UTILISATEURS IN (SELECT ID_AMIS FROM AMIS WHERE ID_UTILISATEURS  = (SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'))";
+	$res = mysqli_query($db, $query) or die('Request error : '.$query);
+	if (mysqli_num_rows($res)>0) {
+		$i=0;
+		while ($row = mysqli_fetch_assoc($res)) {
+			$tableau[$i]=$row;
+			$i++;
+		}
+		return $tableau;
+	}
+}
 
 ?>
 

@@ -1,0 +1,25 @@
+.photoprofil {
+ 	width: 100px;
+ }
+
+ .gauche {
+ 	float: left;
+ 	margin-right: 10px;
+ 	border-style: double;
+ 	padding: 10px;
+ }
+
+ .droit {
+ 	float: right;
+ 	border-style: double;
+ 	padding: 10px;
+
+ }
+
+ .milieu {
+ 	margin-right: 260px;
+ 	margin-left: 140px;
+ 	border-style: double;
+ 	padding: 10px;
+
+ }

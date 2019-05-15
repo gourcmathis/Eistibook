@@ -10,6 +10,10 @@
           rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css"> -->
+          <link href="./base.css"
+          rel="stylesheet" type="text/css">
+          <link href="./fil.css"
+          rel="stylesheet" type="text/css">
            <link href="./actualite.css"
           rel="stylesheet" type="text/css">
 </head>
@@ -17,8 +21,8 @@
 
 
 <body>
-<h1 class="titre"> EISTI - BOOK </h1>
-
+<!-- <h1 class="titre"> EISTI - BOOK </h1> -->
+<img class="logo" src="EISTIB6.png">
 
 <div class="section3">
     <div class="container">

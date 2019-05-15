@@ -128,6 +128,23 @@ function deleteLogin($username) {
 }
 
 
+
+// vérifie que le profil existe 
+function existe($login) {
+	$db = connecterBDD();
+	$query="SELECT * FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'";
+	$res = mysqli_query($db, $query) or die('Request error : '.$query);
+	if (mysqli_num_rows($res)==0) {
+		// il n'y a pas d'utilisateur avec ce login
+		$rep=false;
+	} else {
+		$rep=true;
+	}	
+	deconnecterBDD($db);
+	return $rep;
+}
+
+
 // regarde si util1 et util2 sont amis 
 // paramètres : les 2 logins,
 // retourne un booléen
@@ -147,6 +164,53 @@ function amis($util1,$util2) {
 	}
 	deconnecterBDD($db);	
 	return($amis);
+}
+
+// récupère toutes les infos utilisateur liées à un profil
+function chargerInfos($login) {
+	$db = connecterBDD();
+	// on selectionne toutes les infos utilisateur
+	$query="SELECT * FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'";
+	$res = mysqli_query($db, $query) or die('Request error : '.$query);
+	$tableau = mysqli_fetch_assoc($res);
+	
+	// puis on selectionne les infos de caractère ... 
+	$queryCa="SELECT NOM FROM CARACTERE WHERE ID_CARACTERE IN (SELECT ID_CARACTERE FROM MATCH_CARACTERE c WHERE c.ID_UTILISATEURS=(SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'))";
+	$resCa = mysqli_query($db, $queryCa) or die('Request error : '.$queryCa);
+	$caract = mysqli_fetch_array($resCa);
+	
+	// ... puis de compétences ...
+	$queryComp="SELECT NOM FROM COMPETENCES WHERE ID_COMPETENCES IN (SELECT ID_COMPETENCES FROM MATCH_COMPETENCES c WHERE c.ID_UTILISATEURS=(SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'))";
+	$resComp = mysqli_query($db, $queryComp) or die('Request error : '.$queryComp);
+	$comp = mysqli_fetch_array($resComp);
+	
+	// ... puis de langues ...
+	$queryL="SELECT NOM FROM LANGUE WHERE LANGUE.ID_LANGUE IN (SELECT ID_LANGUE FROM MATCH_LANGUE c WHERE c.ID_UTILISATEURS=(SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'))";
+	$resL = mysqli_query($db, $queryL) or die('Request error : '.$queryL);
+	$langues = mysqli_fetch_array($resL);
+	
+	// ... et enfin d'outils
+	$queryOu="SELECT NOM FROM OUTILS WHERE ID_OUTILS IN (SELECT ID_OUTILS FROM MATCH_OUTILS c WHERE c.ID_UTILISATEURS=(SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'))";
+	$resOu = mysqli_query($db, $queryOu) or die('Request error : '.$queryOu);
+	$outils = mysqli_fetch_array($resOu);
+	
+	deconnecterBDD($db);
+	return array($tableau,$caract,$comp,$langues,$outils);
+} 
+
+function chargerListeAmis($login) {
+	$db = connecterBDD();
+	// on selectionne tous les amis de login (c'est à dire les personnes avec qui il est amis et pas ceux qui sont amis avec lui)
+	$query="SELECT LOGIN, NOM, PRENOM, PHOTO FROM EISTI_BOOK_UTILISATEUR e WHERE e.ID_UTILISATEURS IN (SELECT ID_AMIS FROM AMIS WHERE ID_UTILISATEURS  = (SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'))";
+	$res = mysqli_query($db, $query) or die('Request error : '.$query);
+	if (mysqli_num_rows($res)>0) {
+		$i=0;
+		while ($row = mysqli_fetch_assoc($res)) {
+			$tableau[$i]=$row;
+			$i++;
+		}
+		return $tableau;
+	}
 }
 
 ?>

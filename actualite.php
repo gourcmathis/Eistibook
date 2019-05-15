@@ -60,12 +60,9 @@
 <h2 class="soustitre">    Fil de publications </h2>
 
 <div class="gauche">
-<p>
+
     <img class="photoprofil" src="poulet.jpg"></img>
-</p>
-
-
-    <h3> BERNEDO </h3>
+    <h3> BERNEDO BERNEDO BERNEDO </h3>
     <h4> Hugo</h4>
     <h5> Promo 2022 </h5>
     <h5> 02/07/1998 </h5>

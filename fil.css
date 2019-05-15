@@ -7,12 +7,16 @@
  	margin-right: 10px;
  	border-style: double;
  	padding: 10px;
+ 	/*max-width: 100px;*/
+ 	width: 100px;
  }
 
  .droit {
  	float: right;
  	border-style: double;
  	padding: 10px;
+ 	/*max-width: 250px;*/
+ 	width: 220px;
 
  }
 

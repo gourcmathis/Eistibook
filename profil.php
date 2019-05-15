@@ -32,8 +32,13 @@
                 <ul >
                    
                     <li class="menuli" >
-                        <a class="nonlien" href="inscription.php"> Fil d'actualité </a>
+                        <a class="nonlien" href="profil.php"> Profil </a>
                     </li>
+
+                    <li class="menuli">
+                        <a class="nonlien" href="login.php?action=logout">Messagerie</a>
+                    </li>
+
                     <li class="menuli">
                         <a class="nonlien" href="login.php">Paramètres de mon profil </a>
                     </li>
@@ -42,6 +47,7 @@
                         <a class="nonlien" href="login.php?action=logout">Me déconnecter</a>
                     </li>
 
+                    
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr">EISTI </a>
                     </li>
@@ -54,12 +60,12 @@
 <h2 class="soustitre">    Mon Profil </h2>
 
 <div class="gauche">
-<p>
+
     <img class="photoprofil" src="poulet.jpg"></img>
-</p>
 
 
-    <h3> BERNEDO </h3>
+
+    <h3> BERNEDO BERNEDO BERNEDO </h3>
     <h4> Hugo</h4>
     <h5> Promo 2022 </h5>
     <h5> 02/07/1998 </h5>

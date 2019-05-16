@@ -196,7 +196,7 @@ function chargerInfos($login) {
 	
 	deconnecterBDD($db);
 	return array($tableau,$caract,$comp,$langues,$outils);
-
+}
 
 ?>
 

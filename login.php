@@ -82,7 +82,6 @@ if (!empty($_POST)){
 </div>
 
 <?php
-
 //redirection vers la page correspondante si bien identifié
 if (!empty($_SESSION)) {
 	// si l'utilisateur a été identifié
@@ -93,6 +92,14 @@ if (!empty($_SESSION)) {
 	} else {
 		// ouvrir la page profil
 		$perso=$_SESSION['login'];
+        $db=connecterBDD();
+
+    $sql = 'SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN="'.mysql_escape_string($_POST['email']).'" AND MDP="'.(mysql_escape_string($_POST['password'])).'"';
+    $req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
+    $data = mysqli_fetch_array($req);
+    
+    $_SESSION['id'] = $data['ID_UTILISATEURS'];
+
 		echo $perso;
 		echo "<script>document.location.replace('profil.php?perso=".$perso."')</script>";
 	}

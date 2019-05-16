@@ -33,9 +33,11 @@
                     <li class="menuli">
                         <a class="nonlien" href="login.php">Paramètres de mon profil </a>
                     </li>
-
                     <li class="menuli">
-                        <a class="nonlien" href="login.php?action=logout">Me déconnecter</a>
+                        <a class="nonlien" href="messagerie.php">Messagerie </a>
+                    </li>
+                    <li class="menuli">
+                        <a class="nonlien" href="deconnexion.php?action=logout">Me déconnecter</a>
                     </li>
 
                     <li  class="menuli">

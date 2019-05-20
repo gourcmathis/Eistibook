@@ -41,7 +41,7 @@ require("util.php");
                         <a class="nonlien" href="profil.php?perso=<?php echo $_SESSION['login']; ?>"> Mon profil </a>
                     </li>
                     <li class="menuli">
-                        <a class="nonlien" href="actualites.php"> Mon fil d'actualité </a>
+                        <a class="nonlien" href="publi.php"> Mon fil d'actualité </a>
                     </li>
 
 		            <li class="menuli">

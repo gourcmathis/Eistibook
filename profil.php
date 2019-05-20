@@ -23,60 +23,6 @@ require("util.php");
 </head>
 
 
-
-<body>
-<!-- <h1 class="titre"> EISTI - BOOK </h1> -->
-<img class="logo" src="EISTIB6.png">
-
-
-
-<div class="section3">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-md-12">
-                <ul >
-                   
-                    <li class="menuli" >
-                        <a class="nonlien" href="profil.php?perso=<?php echo $_SESSION['login']; ?>"> Mon profil </a>
-                    </li>
-                    <li class="menuli">
-                        <a class="nonlien" href="actualites.php"> Mon fil d'actualité </a>
-                    </li>
-
-		            <li class="menuli">
-                        <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
-                    </li>
-
-		          
-                    <li class="menuli">
-
-                        <a class="nonlien" href="messagerie.php">Messagerie </a>
-                    </li>
-                    <li class="menuli">
-                        <a class="nonlien" href="deco.php?action=logout">Me déconnecter</a>
-
-                    </li>
-
-                    <li  class="menuli">
-                        <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
 <?php 
 
 if (empty($_GET) || !existe($_GET["perso"]) ) { 
@@ -105,33 +51,89 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
 			// affiche certaines données privées en plus 
 			$acces="ami";
 		} else {
-			// seulement els informations publiques
+			// seulement les informations publiques
 			$acces='etranger';
 		}
 	}
 }
-// charger les infos de la page de profil + en fonction de acces différentes fonctionnalités
+?>
+
+<body>
+<!-- <h1 class="titre"> EISTI - BOOK </h1> -->
+<img class="logo" src="EISTIB6.png">
+
+
+
+<div class="section3">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul >
+                   
+                    <li class="menuli" >
+                        <a class="nonlien" href="profil.php?perso=<?php echo $_SESSION['login']; ?>"> Mon profil </a>
+                    </li>
+                    <li class="menuli">
+                        <a class="nonlien" href="actualites.php"> Mon fil d'actualité </a>
+                    </li>
+
+		            <li class="menuli">
+                        <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
+                    </li>
+
+		            <li class="menuli">
+                        <a class="nonlien" href="messagerie.php"> Messagerie </a>
+                    </li>
+
+                    <li class="menuli">
+                        <a class="nonlien" href="deco.php"> Me déconnecter </a>
+                    </li>
+
+                    <li  class="menuli">
+                        <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
+                    </li>
+                    
+                    <?php
+                    //TODO faire la fonction éditer le profil
+                    if ($acces=="mypage") {
+                    	echo "<li  class='menuli'> <a class='nonlien' href='jesaispasencore'> Editer mon profil </a> </li>";
+                    }
+                    ?>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<?php
 
 // on charge toutes les infos puis on sélectionne celles qu'il faut afficher
+// if terminé tout en bas de la page
 if ($acces<>"none") {
 	$tableau=chargerInfos($pageDe);
 	$infos=$tableau[0];
-
-	print_r($tableau[1]);
-	echo "<br/>";
-	
-	print_r($tableau[2]);
-	echo "<br/>";
-	
-	print_r($tableau[3]);
-	echo "<br/>";
-	
+		
 	$amis=chargerListeAmis($pageDe);
-	print_r($amis);
 
 
-echo "  <h2 class='soustitre'>    Mon Profil </h2>
-	<div class='gauche'>";
+
+echo "  <h2 class='soustitre'>"; 
+if ($acces=="mypage") {
+	echo "Mon Profil ";
+} else {
+	echo "Profil de ".$infos['LOGIN'];
+}
+
+echo "</h2><div class='gauche'>";
 	
 // photo de profil
 if (isset($infos['photo'])) {
@@ -145,22 +147,116 @@ if (isset($infos['photo'])) {
 echo "
 	<h3> ".$infos['NOM']." </h3>
     	<h4> ".$infos['PRENOM']."</h4>
-    	<h5> Promo ".$infos['PROMOTION']." </h5>
-    	<h5> ".$infos['NAISSANCE']." </h5>
-	</div>";
+    	<h5> Promo ".$infos['PROMOTION']." </h5>";
+
+if (!empty($infos['CITATION'])) {
+	echo '"'.$infos['CITATION'].'"';
+}
+
+
+echo "</div>";
 
 	
 // liste d'amis 
-echo "  <div class='droit'><h3>Liste d'amis</h3>";
-affichageAmisProfil($amis);
-echo "	</div>";
+echo "  <div class='droit'>";
+if ($acces=="mypage") {
+	echo "<h3>Ma liste d'amis</h3>";
+} else {
+	echo "<h3>Tous les amis de ".$infos['LOGIN']."</h3>";
+}
+
+
+if (!empty($amis)) {
+	affichageAmisProfil($amis);
+} else { 
+	if ($acces=="mypage") {
+		echo "Vous n'avez pas d'amis :( <br/> Vous pouvez retrouver des connaissances dans l'onglet 'gérer mes amis'";
+	} else {
+		echo "Cet utilisateur n'a pas d'amis enregistré.";
+	} 
+}
+echo "</div>";
 	
 	
 // autres informations et publications	
-echo "	<div class='milieu'>
-	<h3> Informations du profil </h3>
+echo "	<div class='milieu'>";
 
-	<h3> Publications par ce profil </h3>
+// introduction 
+if (!empty($infos['INTRO'])) {
+	echo "<div class='intro'>".$infos['INTRO']."</div>";
+}
+
+
+echo "<h3> Informations du profil </h3>";
+
+echo "<div class='info'>".$infos['PRENOM']." est né le ".$infos['NAISSANCE'];
+
+if (!empty($infos['PROFESSION'])) {
+	echo "<div class='info'>".$infos['PRENOM']." est ".$infos['PROFESSION'];
+	if (!empty($infos['EMPLOI'])) {
+		echo "chez ".$infos['EMPLOI'];
+	}
+	echo "</div>";
+}
+
+if (!empty($infos['VILLE'])) {
+	echo "<div class='info'>".$infos['PRENOM']." habite à ".$infos['VILLE']."</div>";
+}
+
+if (!empty($infos['LOISIR'])) {
+	echo "<div class='info'>Ses loisirs : ".$infos['LOISIR']."</div>";
+}
+
+echo "<br/><br/>";
+// informations plus privées : 
+if ($acces<>"etranger") {
+	// caractère
+	$caract=$tableau[1];
+	if (!empty($caract)) {
+		echo "<div class='info'><b>CARACTERE : </b>";
+		foreach ($caract as $unit) {
+			echo $unit.", ";
+		}
+		echo "</div>";	
+	}
+	
+	// compétences 
+	$comp=$tableau[2];
+	if (!empty($comp)) {
+		echo "<div class='info'><b>COMPETENCES : </b>";
+		foreach ($comp as $unit) {
+			echo $unit.", ";
+		}
+		echo "</div>";	
+	}
+	
+	// langues parlées
+	$langues=$tableau[3];
+	if (!empty($langues)) {
+		echo "<div class='info'><b>LANGUES PARLEES : </b>";
+		foreach ($langues as $unit) {
+			echo $unit.", ";
+		}
+		echo "</div>";	
+	}
+	
+	// outils maitrisés
+	$outils=$tableau[4];
+	if (!empty($outils)) {
+		echo "<div class='info'><b>OUTILS MAITRISES : </b>";
+		foreach ($outils as $unit) {
+			echo $unit.", ";
+		}
+		echo "</div>";	
+	}
+	
+	
+} 
+	
+
+
+
+echo "	<h3> Publications par ce profil </h3>
 	<p> 
 	 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -170,10 +266,15 @@ echo "	<div class='milieu'>
 	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	</p>
 	</div>
-	<?php 
 	";
 } 
 ?>
-
+<!-- TODO 
+	. ajouter les publications récentes de cette personne
+	. mettre en forme les différentes infos
+	. fonction d'édition (nouvelle page similaire)
+	. mettre des liens sur les amis vers leur profil (dans afficher_amis, util.php)
+	
+-->
 </body>
 </html>

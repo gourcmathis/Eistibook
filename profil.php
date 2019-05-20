@@ -48,15 +48,13 @@ require("util.php");
                         <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
                     </li>
 
-		            <li class="menuli">
-                        <a class="nonlien" href="messagerie.php"> Messagerie </a>
-                    </li>
+		          
                     <li class="menuli">
 
                         <a class="nonlien" href="messagerie.php">Messagerie </a>
                     </li>
                     <li class="menuli">
-                        <a class="nonlien" href="deconnexion.php?action=logout">Me déconnecter</a>
+                        <a class="nonlien" href="deco.php?action=logout">Me déconnecter</a>
 
                     </li>
 

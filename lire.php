@@ -9,12 +9,19 @@ if (!isset($_SESSION['login'])) {
 ?>
 
 <html>
-<head>
-<title>EISTI - BOOK</title>
+<head lang="fr">
+    <meta charset="UTF-8">
+    <title>EISTI - BOOK </title>
+
+    <link href="./base.css"
+          rel="stylesheet" type="text/css">
+           <link href="./login.css"
+          rel="stylesheet" type="text/css">
 </head>
 
 <body>
-<a href="messagerie.php">Retour à l'accueil</a><br /><br />
+<a href="profil.php">Home</a></br></br>
+<a href="messagerie.php">Retour</a><br /><br />
 <?php
 // on teste si notre paramètre existe bien et qu'il n'est pas vide
 if (!isset($_GET['id_message']) || empty($_GET['id_message'])) {

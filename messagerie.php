@@ -9,11 +9,18 @@ if (!isset($_SESSION['login'])) {
 ?>
 
 <html>
-<head>
-<title>EISTI - BOOK</title>
+<head lang="fr">
+    <meta charset="UTF-8">
+    <title>EISTI - BOOK </title>
+
+    <link href="./base.css"
+          rel="stylesheet" type="text/css">
+           <link href="./login.css"
+          rel="stylesheet" type="text/css">
 </head>
 
 <body>
+<a href="profil.php">Home</a></br></br>
 Bienvenue <?php echo stripslashes(htmlentities(trim($_SESSION['login']))); ?> !<br /><br />
 <?php
 $db = connecterBDD();

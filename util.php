@@ -151,7 +151,7 @@ function existe($login) {
 function amis($util1,$util2) {
 	$db = connecterBDD();
 	// on selectionne tous les amis de util1
-	$query="SELECT LOGIN FROM EISTI_BOOK_UTILISATEUR WHERE ID-UTILISATEURS IN (SELECT ID_AMIS FROM AMIS WHERE ID_UTILISATEURS=(SELECT ID-UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$util1'));";
+	$query="SELECT LOGIN FROM EISTI_BOOK_UTILISATEUR WHERE ID_UTILISATEURS IN (SELECT ID_AMIS FROM AMIS WHERE ID_UTILISATEURS=(SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$util1'));";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	// puis on regarde si util2 en fait partie
 	$amis=false;

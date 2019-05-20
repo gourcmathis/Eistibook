@@ -3,13 +3,18 @@
 <head lang="fr">
     <meta charset="UTF-8">
     <title>EISTI - BOOK </title>
+
+    <link href="./base.css"
+          rel="stylesheet" type="text/css">
            <link href="./login.css"
           rel="stylesheet" type="text/css">
 </head>
 
 <body>
-<img class="logo" src="./EISTIB5.png">
-<h1 class="titre"> EISTI - BOOK </h1>
+<img class="logo" src="./EISTIB6.png">
+
+<h2 class="soustitre"> Formulaire de connexion </h2>
+<!-- <h1 class="titre"> EISTI - BOOK </h1> -->
 
 <?php
 require("util.php");
@@ -28,7 +33,7 @@ if (!empty($_POST)){
                 <form class="form-horizontal" role="form" action="login.php" method="POST">
                     <div class="form-group">
                         <div class="col-sm-2">
-                            <label for="email" class="control-label">Login</label>
+                            <label for="email" class="control-label"> Identifiant</label>
                         </div>
                         <div class="col-sm-10">
                             <input type="email" class="form-control" id="email" name="email" placeholder="nom@eisti.eu">
@@ -36,7 +41,7 @@ if (!empty($_POST)){
                     </div>
                     <div class="form-group">
                         <div class="col-sm-2">
-                            <label for="password" class="control-label">Password</label>
+                            <label for="password" class="control-label"> Mot de passe </label>
                         </div>
                         <div class="col-sm-10">
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password">

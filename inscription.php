@@ -10,8 +10,11 @@
           rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css"> -->
+          <link href="./base.css"
+          rel="stylesheet" type="text/css">
            <link href="./inscription.css"
           rel="stylesheet" type="text/css">
+          
 </head>
 
 
@@ -26,15 +29,26 @@ require("util.php");
 if (isset($_POST['nom']) && isset($_POST['prenom'])) {
 $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST['ddn'],'email' => $_POST['email'],'promo' => $_POST['promo'],'password' => $_POST['password']);
 
-    insertEleve($tab);
-}
+	// ajoute le nouvel élève à la bdd
+	insertEleve($tab);
+
+	//crée les données de session
+	$_SESSION["login"]=$_POST['email'];
+	$_SESSION["password"]=$_POST['password'];
+	$_SESSION["type"]="utilisateur";
+
+	// redirige vers la page de profil de la personne
+	$perso=$_POST['email'];
+	echo "<script>document.location.replace('profil.php?perso=".$perso."')</script>";}
 
 
 ?>
 
 
-<h1 class="titre"> EISTI - BOOK </h1>
+<!-- <h1 class="titre"> EISTI - BOOK </h1> -->
 
+
+<img class="logo" src="EISTIB6.png">
 
 <h2 class="soustitre"> Formulaire d'inscription </h2>
 <div class="section2">

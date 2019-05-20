@@ -1,16 +1,4 @@
-.soustitre{
-	margin-left: 149px;
-}
- .section2 {
- 	margin-top: 10%;
- 	margin-left: 40%;
- }
-
- .section3 {
- 	margin-top: 30px;
- 	 }
-
- .photoprofil {
+.photoprofil {
  	width: 100px;
  }
 
@@ -19,12 +7,16 @@
  	margin-right: 10px;
  	border-style: double;
  	padding: 10px;
+ 	/*max-width: 100px;*/
+ 	width: 100px;
  }
 
  .droit {
  	float: right;
  	border-style: double;
  	padding: 10px;
+ 	/*max-width: 250px;*/
+ 	width: 220px;
 
  }
 

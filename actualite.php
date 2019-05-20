@@ -10,6 +10,10 @@
           rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css"> -->
+          <link href="./base.css"
+          rel="stylesheet" type="text/css">
+          <link href="./fil.css"
+          rel="stylesheet" type="text/css">
            <link href="./actualite.css"
           rel="stylesheet" type="text/css">
 </head>
@@ -17,8 +21,8 @@
 
 
 <body>
-<h1 class="titre"> EISTI - BOOK </h1>
-
+<!-- <h1 class="titre"> EISTI - BOOK </h1> -->
+<img class="logo" src="EISTIB6.png">
 
 <div class="section3">
     <div class="container">
@@ -56,12 +60,9 @@
 <h2 class="soustitre">    Fil de publications </h2>
 
 <div class="gauche">
-<p>
+
     <img class="photoprofil" src="poulet.jpg"></img>
-</p>
-
-
-    <h3> BERNEDO </h3>
+    <h3> BERNEDO BERNEDO BERNEDO </h3>
     <h4> Hugo</h4>
     <h5> Promo 2022 </h5>
     <h5> 02/07/1998 </h5>

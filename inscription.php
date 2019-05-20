@@ -55,7 +55,7 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form class="form-horizontal" role="form" action="login.php" method="POST">
+                <form class="form-horizontal" role="form" action="inscription.php" method="POST">
                     <div class="form-group">
                         <div class="col-sm-2">
                             <label for="email" class="control-label">Nom</label>

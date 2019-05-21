@@ -1,4 +1,4 @@
-CREATE TABLE publi (
+CREATE TABLE publication (
 	id int(6) NOT NULL auto_increment,
 	auteur VARCHAR(30) NOT NULL,
 	titre text NOT NULL,

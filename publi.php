@@ -1,7 +1,8 @@
+
 <?php
 require('util.php');
 // on teste si le formulaire a été validé
-if (isset($_POST['go']) && $_POST['go']=='Poster la publi') {
+if (isset($_POST['go']) && $_POST['go']=='Poster') {
 	// on se connecte à notre base
 	$db=connecterBDD();
 
@@ -11,18 +12,18 @@ if (isset($_POST['go']) && $_POST['go']=='Poster la publi') {
 	}
 	else {
 	if ( empty($_POST['publi'])) {
-		$erreur = 'Au moins un des champs est vide.';
+		$erreur = 'Le champ est vide.';
 	}
 	// si tout est bon, on peut commencer l'insertion dans la base
 	else {
 		// lancement de la requête d'insertion
-		$sql = 'INSERT INTO publi VALUES("", "'.$_SESSION['login'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['publi']).'")';
+		$sql = 'INSERT INTO publication VALUES("", "'.$_SESSION['login'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['publi']).'")';
 
 		// on lance la requête (mysqli_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 		mysqli_query($db,$sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error());
 
 		// on ferme la connexion à la base de données
-		mysqli_close();
+		mysqli_close($db);
 
 		// on redirige vers la page d'accueil du site (attention, cette redirection ne fonctionne qui si vous avez placé cette page dans un répertoire à partir de la racine du site). Si ce n'est pas le cas, veuillez entrer ici le bon chemin d'accès afin de retomber sur la page d'accueil du site.
 		header('Location: ./publi.php');
@@ -125,7 +126,7 @@ if (isset($erreur)) echo '<br /><br />',$erreur;
 $db=connecterBDD();
 
 // lancement de la requête. on sélectionne les publi que l'on va ordonner suivant l'ordre "inverse" des dates (de la plus récente à la plus vieille : DESC) tout en ne sélectionnant que le nombre voulu de publi à afficher (LIMIT)
-$sql = 'SELECT auteur, date, texte FROM publi ORDER BY date DESC;';
+$sql = 'SELECT auteur, date, texte FROM publication ORDER BY date DESC;';
 
 // on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 $req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());

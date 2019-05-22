@@ -175,7 +175,7 @@ echo "</div>";
 
 echo "<div class='milieu'>";
 ?>
-Envoyer un message :<br /><br />
+<h4>Envoyer un message :</h4>
 
 <?php
 $db= connecterBDD();
@@ -219,9 +219,12 @@ if (isset($erreur)) echo '<br /><br />',$erreur;
 
 echo "</div>";
 
-// autres informations et publications	
-echo "	<div class='milieu'>";
 
+
+
+// autres informations et publications	
+echo "<br/><div class='milieu'>";
+echo "<h4>Messages reçus</h4>";
 
 $db = connecterBDD();
 

@@ -120,13 +120,12 @@ if (isset($_POST['go']) && $_POST['go']=='Poster') {
 <h3> Mes actualités </h3>
 <p> 
 
-<form action="publi.php" method="post">
-<table>
-<tr><td>
+<form action="publi.php" method="post" class="formpubl">
+
 <textarea name="publi" cols="50" rows="10" placeholder="Exprimez vous !"><?php if (isset($_POST['publi'])) echo htmlentities(trim($_POST['publi'])); ?></textarea>
-</td></tr><tr><td><td align="right">
-<input type="submit" name="go" value="Poster">
-</td></tr></table>
+
+<input type="submit" name="go" class="menuli" class="nonlien" value="Poster">
+
 </form>
 <?php
 // on affiche les erreurs éventuelles
@@ -165,9 +164,13 @@ else {
     sscanf($data['date'], "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
 
     // on affiche les résultats
-    echo '<br />publier par : ' , htmlentities(trim($data['auteur'])) , '<br />';
-    echo 'Postée le : ' , $jour , '/' , $mois , '/' , $an , ' à ' , $heure , ':' , $min , ':' , $sec , '<br /><br />';
+    echo '<div class="publication" >' ;
+    echo '<p class="nom" >' ;
+    echo '<br />Publication de : ' , htmlentities(trim($data['auteur'])) , '<br />';
+    echo 'Le : ' , $jour , '/' , $mois , '/' , $an , ' à ' , $heure , ':' , $min , ':' , $sec , '<br /><br />';
+    echo '</p>' ;
     echo '' , nl2br(htmlentities(trim($data['texte']))) , '<br />';
+    echo "</div>";
     }
 }
 // on libère l'espace mémoire alloué à cette requête

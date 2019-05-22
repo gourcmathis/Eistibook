@@ -59,6 +59,7 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
 ?>
 
 <body>
+
 <!-- <h1 class="titre"> EISTI - BOOK </h1> -->
 <img class="logo" src="EISTIB6.png">
 

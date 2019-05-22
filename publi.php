@@ -100,6 +100,26 @@ if (isset($_POST['go']) && $_POST['go']=='Poster') {
     </div>
 </div>
 
+<h2 class="soustitre">    Fil de publications </h2>
+
+<div class="gauche">
+
+    <img class="photoprofil" src="poulet.jpg"></img>
+    <h3> BERNEDO BERNEDO BERNEDO </h3>
+    <h4> Hugo</h4>
+    <h5> Promo 2022 </h5>
+    <h5> 02/07/1998 </h5>
+</div>
+
+<div class="droit"> 
+
+<h3> Ma liste d'amis </h3>
+<p> <img class="photoprofil" src="pouletroux.jpg"></img> Guillaume Proton </p>
+</div>
+<div class="milieu">
+<h3> Mes actualités </h3>
+<p> 
+
 <form action="publi.php" method="post">
 <table>
 <tr><td>
@@ -135,20 +155,20 @@ $req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_
 $nb_publi = mysqli_num_rows($req);
 
 if ($nb_publi == 0) {
-	echo 'Aucune publication enregistrée.';
+    echo 'Aucune publication enregistrée.';
 }
 else {
-	// si on a au moins une publi, on l'affiche
-	while ($data = mysqli_fetch_array($req)) {
+    // si on a au moins une publi, on l'affiche
+    while ($data = mysqli_fetch_array($req)) {
 
-	// on décompose la date
-	sscanf($data['date'], "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
+    // on décompose la date
+    sscanf($data['date'], "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
 
-	// on affiche les résultats
-	echo '<br />publier par : ' , htmlentities(trim($data['auteur'])) , '<br />';
-	echo 'Postée le : ' , $jour , '/' , $mois , '/' , $an , ' à ' , $heure , ':' , $min , ':' , $sec , '<br /><br />';
-	echo '' , nl2br(htmlentities(trim($data['texte']))) , '<br />';
-	}
+    // on affiche les résultats
+    echo '<br />publier par : ' , htmlentities(trim($data['auteur'])) , '<br />';
+    echo 'Postée le : ' , $jour , '/' , $mois , '/' , $an , ' à ' , $heure , ':' , $min , ':' , $sec , '<br /><br />';
+    echo '' , nl2br(htmlentities(trim($data['texte']))) , '<br />';
+    }
 }
 // on libère l'espace mémoire alloué à cette requête
 mysqli_free_result ($req);
@@ -156,6 +176,10 @@ mysqli_free_result ($req);
 // on ferme la connexion à la base de données
 mysqli_close ($db);
 ?>
+
+
+</p>
+</div>
 
 </body>
 </html>

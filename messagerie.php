@@ -20,7 +20,43 @@ if (!isset($_SESSION['login'])) {
 </head>
 
 <body>
-<a href="profil.php">Home</a></br></br>
+<div class="section3">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul >
+                   
+                    <li class="menuli" >
+                        <a class="nonlien" href="profil.php?perso=<?php echo $_SESSION['login']; ?>"> Mon profil </a>
+                    </li>
+                    <li class="menuli">
+                        <a class="nonlien" href="publi.php"> Mon fil d'actualité </a>
+                    </li>
+
+		            <li class="menuli">
+                        <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
+                    </li>
+
+		          
+                    <li class="menuli">
+
+                        <a class="nonlien" href="messagerie.php">Messagerie </a>
+                    </li>
+                    <li class="menuli">
+                        <a class="nonlien" href="deco.php?action=logout">Me déconnecter</a>
+
+                    </li>
+
+                    <li  class="menuli">
+                        <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 Bienvenue <?php echo stripslashes(htmlentities(trim($_SESSION['login']))); ?> !<br /><br />
 <?php
 $db = connecterBDD();

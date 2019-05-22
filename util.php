@@ -247,17 +247,75 @@ function chargerListeAmis($login) {
 // affiche sur la page de profil les infos des amis à partir de la liste d'amis
 function affichageAmisProfil($liste) {
 	foreach ($liste as $ami) {
-		echo "<div class='ami'>";
+		echo "<a href='profil.php?perso=".$ami['LOGIN']."'><div class='ami'>";
 		if (isset($ami['photo'])) {
 			$src=$ami['photo'];
 			echo "<p><img class='photoprofil' src='".$src."'></img></p>";
 		} else {
 			echo "<p><img class='photoprofil' src='poulet.jpg'></img></p>";
 		}
-		echo "<h4> ".$ami['NOM']." ".$ami['PRENOM']." </h4></div>";
+		echo "<h4> ".$ami['NOM']." ".$ami['PRENOM']." </h4></div></a>";
 	}
 }
 
+
+
+// charge toutes les options de caractère, langue, compétences et outils pour former les checkbox de edit_profil
+// TODO à vérifier !!! 
+function chargerOptions() {
+	$db = connecterBDD();
+	
+	// on selectionne les options de caractère ... 
+	$queryCa="SELECT * CARACTERE";
+	$resCa = mysqli_query($db, $queryCa) or die('Request error : '.$queryCa);
+	$caract=array();
+	if (mysqli_num_rows($resCa)>0) {
+		$i=0;
+		while ($row = mysqli_fetch_assoc($resCa)) {
+			$caract[$i]=array($row['NOM'],$row['ID_CARACTERE']);
+			$i++;
+		}
+	}
+	
+	// ... puis de compétences ...
+	$queryComp="SELECT * FROM COMPETENCES";
+	$resComp = mysqli_query($db, $queryComp) or die('Request error : '.$queryComp);
+	$comp=array();
+	if (mysqli_num_rows($resComp)>0) {
+		$i=0;
+		while ($row = mysqli_fetch_assoc($resComp)) {
+			$comp[$i]=array($row['NOM'],$row['ID_COMPETENCE']);
+			$i++;
+		}
+	}
+
+	// ... puis de langues ...
+	$queryL="SELECT * FROM LANGUE";
+	$resL = mysqli_query($db, $queryL) or die('Request error : '.$queryL);
+	$langues=array();
+	if (mysqli_num_rows($resL)>0) {
+		$i=0;
+		while ($row = mysqli_fetch_assoc($resL)) {
+			$langues[$i]=array($row['NOM'],$row['ID_LANGUE']);
+			$i++;
+		}
+	}
+	
+	// ... et enfin d'outils
+	$queryOu="SELECT * FROM OUTILS";
+	$resOu = mysqli_query($db, $queryOu) or die('Request error : '.$queryOu);
+	$outils=array();
+	if (mysqli_num_rows($resOu)>0) {
+		$i=0;
+		while ($row = mysqli_fetch_assoc($resOu)) {
+			$outils[$i]=array($row['NOM'],$row['ID_OUTILS']);
+			$i++;
+		}
+	}
+	
+	deconnecterBDD($db);
+	return array($caract,$comp,$langues,$outils);
+}
 
 ?>
 

@@ -31,7 +31,7 @@ else {
 	$db = connecterBDD();
 
 	// on prépare une requete SQL selectionnant la date, le titre et l'expediteur du message que l'on souhaite lire, tout en prenant soin de vérifier que le message appartient bien au membre connecté
-	$sql = 'SELECT titre, date, message, EISTI_BOOK_UTILISATEUR.LOGIN as expediteur FROM messages, EISTI_BOOK_UTILISATEUR WHERE id_destinataire="'.$_SESSION['id'].'" AND id_expediteur=EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS AND messages.id="'.$_GET['id_message'].'"';
+	$sql = 'SELECT titre, date, message, concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as expediteur FROM messages, EISTI_BOOK_UTILISATEUR WHERE id_destinataire="'.$_SESSION['id'].'" AND id_expediteur=EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS AND messages.id="'.$_GET['id_message'].'"';
 	// on lance cette requete SQL à MySQL
 	$req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
 	$nb = mysqli_num_rows($req);

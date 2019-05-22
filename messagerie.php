@@ -62,7 +62,7 @@ Bienvenue <?php echo stripslashes(htmlentities(trim($_SESSION['login']))); ?> !<
 $db = connecterBDD();
 
 // on prépare une requete SQL cherchant tous les titres, les dates ainsi que l'auteur des messages pour le membre connecté
-$sql = 'SELECT titre, date, EISTI_BOOK_UTILISATEUR.login as expediteur, messages.id as id_message FROM messages, EISTI_BOOK_UTILISATEUR WHERE id_destinataire="'.$_SESSION['id'].'" AND id_expediteur=EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS ORDER BY date DESC';
+$sql = 'SELECT titre, date, concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as expediteur, messages.id as id_message FROM messages, EISTI_BOOK_UTILISATEUR WHERE id_destinataire="'.$_SESSION['id'].'" AND id_expediteur=EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS ORDER BY date DESC';
 // lancement de la requete SQL
 $req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
 $nb = mysqli_num_rows($req);

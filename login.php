@@ -72,9 +72,6 @@ if (!empty($_POST)){
                     <li class="menuli" >
                         <a class="nonlien" href="inscription.php">Inscription</a>
                     </li>
-                    <li class="menuli">
-                        <a class="nonlien" href="login.php">Me Connecter</a>
-                    </li>
 
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr">EISTI </a>

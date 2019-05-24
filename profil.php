@@ -96,9 +96,8 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
                     </li>
                     
                     <?php
-                    //TODO faire la fonction éditer le profil
                     if ($acces=="mypage") {
-                    	echo "<li  class='menuli'> <a class='nonlien' href='jesaispasencore'> Editer mon profil </a> </li>";
+                    	echo "<li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=".$_SESSION['login']."'> Editer mon profil </a> </li>";
                     }
                     ?>
 

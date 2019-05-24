@@ -138,16 +138,12 @@ $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST[
             <div class="col-md-12">
                 <ul >
                    
-                    <li class="menuli" >
-                        <a class="nonlien" href="inscription.php">Inscription</a>
-                    </li>
+                   
                     <li class="menuli">
                         <a class="nonlien" href="login.php">Me Connecter</a>
                     </li>
 
-                    <li class="menuli">
-                        <a class="nonlien" href="login.php?action=logout">Me déconnecter</a>
-                    </li>
+                    
 
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr">EISTI</a>

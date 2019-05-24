@@ -192,7 +192,7 @@ if ($nb == 0) {
 else {
 	// si au moins un membre qui n'est pas nous même a été trouvé, on affiche le formulaire d'envoie de message
 	?>
-	<form action="envoyer.php" method="post">
+	<form action="messagerie.php" method="post">
 	Pour : <select name="destinataire">
 	<?php
 	// on alimente le menu déroulant avec les login des différents membres du site

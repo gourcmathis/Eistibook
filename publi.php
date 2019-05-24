@@ -1,6 +1,13 @@
 
 <?php
 require('util.php');
+$pageDe=$_SESSION['login'];
+    $acces="mypage";
+$tableau=chargerInfos($pageDe);
+    $infos=$tableau[0];
+        
+    $amis=chargerListeAmis($pageDe);
+
 // on teste si le formulaire a été validé
 if (isset($_POST['go']) && $_POST['go']=='Poster') {
 	// on se connecte à notre base
@@ -17,7 +24,7 @@ if (isset($_POST['go']) && $_POST['go']=='Poster') {
 	// si tout est bon, on peut commencer l'insertion dans la base
 	else {
 		// lancement de la requête d'insertion
-		$sql = 'INSERT INTO publication VALUES("", "'.$_SESSION['login'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['publi']).'")';
+		$sql = 'INSERT INTO publication VALUES("", "'.$infos['PRENOM']." ".$infos['NOM'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['publi']).'")';
 
 		// on lance la requête (mysqli_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 		mysqli_query($db,$sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error());
@@ -100,22 +107,63 @@ if (isset($_POST['go']) && $_POST['go']=='Poster') {
     </div>
 </div>
 
-<h2 class="soustitre">    Fil de publications </h2>
+<?php
 
-<div class="gauche">
+// on charge toutes les infos puis on sélectionne celles qu'il faut afficher
+// if terminé tout en bas de la page
 
-    <img class="photoprofil" src="poulet.jpg"></img>
-    <h3> BERNEDO BERNEDO BERNEDO </h3>
-    <h4> Hugo</h4>
-    <h5> Promo 2022 </h5>
-    <h5> 02/07/1998 </h5>
-</div>
+    
 
-<div class="droit"> 
 
-<h3> Ma liste d'amis </h3>
-<p> <img class="photoprofil" src="pouletroux.jpg"></img> Guillaume Proton </p>
-</div>
+
+echo "  <h2 class='soustitre'>"; 
+echo "Publications ";
+
+
+echo "</h2><div class='gauche'>";
+    
+// photo de profil
+if (isset($infos['photo'])) {
+    $src=$infos['photo'];
+    echo "<p><img class='photoprofil' src='".$src."'></img></p>";
+} else {
+    echo "<p><img class='photoprofil' src='poulet.jpg'></img></p>";
+}
+
+// informations générales
+echo "
+    <h3> ".$infos['NOM']." </h3>
+        <h4> ".$infos['PRENOM']."</h4>
+        <h5> Promo ".$infos['PROMOTION']." </h5>";
+
+if (!empty($infos['CITATION'])) {
+    echo '"'.$infos['CITATION'].'"';
+}
+
+
+echo "</div>";
+
+    
+// liste d'amis 
+echo "  <div class='droit'>";
+if ($acces=="mypage") {
+    echo "<h3>Ma liste d'amis</h3>";
+} else {
+    echo "<h3>Tous les amis de ".$infos['LOGIN']."</h3>";
+}
+
+
+if (!empty($amis)) {
+    affichageAmisProfil($amis);
+} else { 
+    if ($acces=="mypage") {
+        echo "Vous n'avez pas d'amis :( <br/> Vous pouvez retrouver des connaissances dans l'onglet 'gérer mes amis'";
+    } else {
+        echo "Cet utilisateur n'a pas d'amis enregistré.";
+    } 
+}
+echo "</div>";
+?>
 <div class="milieu">
 <h3> Mes actualités </h3>
 <p> 

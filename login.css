@@ -13,3 +13,17 @@
  .section4 {
  	margin-left: 35%;
  }
+
+  input, select, textarea {
+  font-family : inherit;
+  font-size   : 100%;
+}
+select,input ,textarea {
+	resize: none;
+	width: 20%;
+	height: 5%;
+	background-color: #8dc0f3;
+	border-color: black;
+	border-style: double;
+	border-width: 3px;
+}

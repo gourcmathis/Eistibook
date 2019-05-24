@@ -17,7 +17,7 @@
   padding:9px 0 9px 0;
  	padding-left: 10px;
  	padding-right: 10px;
-	font:bold 13px Arial;
+	font: 13px Arial;
 	background:#8dc0f3;
 	border-radius:2px;
 	/*width:100px;*/
@@ -29,4 +29,5 @@
 
 textarea {
 	width: 99%;
+	border-style: none;
 }

@@ -23,7 +23,7 @@ textarea {
 	height: 5%;
 	background-color: #8dc0f3;
 	border-color: black;
-	border-style: double;
+	border-style: none;
 	border-width: 3px;
 }
 

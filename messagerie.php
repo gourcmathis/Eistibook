@@ -60,6 +60,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 
 <body>
 <!-- <h1 class="titre"> EISTI - BOOK </h1> -->
+<div class="entete">
 <img class="logo" src="EISTIB6.png">
 
 
@@ -108,7 +109,9 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 </div>
 
 
+</div>
 
+<div class="deb"></div>
 
 
 

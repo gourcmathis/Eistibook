@@ -45,6 +45,8 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
           rel="stylesheet" type="text/css">
            <link href="./profil.css"
           rel="stylesheet" type="text/css">
+          <link href="./messagerie.css"
+          rel="stylesheet" type="text/css">
 </head>
 
 
@@ -204,7 +206,7 @@ else {
 	</select><br />
 	Titre : <input type="text" name="titre" value="<?php if (isset($_POST['titre'])) echo stripslashes(htmlentities(trim($_POST['titre']))); ?>"><br />
 	Message : <textarea name="message"><?php if (isset($_POST['message'])) echo stripslashes(htmlentities(trim($_POST['message']))); ?></textarea><br />
-	<input type="submit" name="go" value="Envoyer">
+	<input type="submit" class="bouton" name="go" value="Envoyer">
 	</form>
 	<?php
 }
@@ -241,7 +243,7 @@ if ($nb == 0) {
 else {
 	// si on a des messages, on affiche la date, un lien vers la page lire.php ainsi que le titre et l'auteur du message
 	while ($data = mysqli_fetch_array($req)) {
-	echo $data['date'] , ' - <a href="lire.php?id_message=' , $data['id_message'] ,'&idDestinataire=',$data['id_destinataire'], '">' , stripslashes(htmlentities(trim($data['titre']))) , '</a> [ Message de ' , stripslashes(htmlentities(trim($data['expediteur']))) , ' ]<br />';
+	echo $data['date'] , ' - <a class="messa" href="lire.php?id_message=' , $data['id_message'] ,'&idDestinataire=',$data['id_destinataire'], '">' , stripslashes(htmlentities(trim($data['titre']))) , '</a> [ Message de ' , stripslashes(htmlentities(trim($data['expediteur']))) , ' ]<br />';
 	}
 }
 mysqli_free_result($req);

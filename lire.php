@@ -215,8 +215,17 @@ else {
 	echo nl2br(stripslashes(htmlentities(trim($data['message']))));
 
 	// on affiche également un lien permettant de supprimer ce message de la boite de réception
-	echo '<br /><br /><a href="supprimer.php?id_message=' , $_GET['id_message'] , '">Supprimer ce message</a>';
-	echo '<br /><br /><a href="signaler.php?id_message=' , $_GET['id_message'] , '">Signaler ce message</a>';
+	echo '<ul >
+                   
+            <li class="menuli" >
+              <a class="nonlien" href="supprimer.php?id_message=' , $_GET['id_message'] , '"> Supprimer </a>
+            </li>
+            <li class="menuli" >
+              <a class="nonlien" href="signaler.php?id_message=' , $_GET['id_message'] , '"> Signaler </a>
+            </li>
+      </ul>';
+
+	
 	
 	}
 	mysqli_free_result($req);

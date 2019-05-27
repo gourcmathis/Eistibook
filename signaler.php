@@ -8,22 +8,21 @@ if (!isset($_SESSION['login'])) {
 	exit();
 }
 // on teste si le formulaire a bien été soumis
-if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
-	if ( empty($_POST['motif']) ) {
+if (isset($_GET['go']) && $_GET['go'] == 'Envoyer') {
+	if ( empty($_GET['motif']) ) {
 	$erreur = 'Veuillez rentrer un motif';
 	}
 	else {
 
+
 	$db = connecterBDD();
 
 	// si tout a été bien rempli, on insère le message dans notre table SQL
-	$sql = 'UPDATE messages SET (signalement_motif ="'.mysqli_escape_string($db,$_POST['motif']).'"), signalement_msg = "'.mysqli_escape_string($db,$_POST['message']).'" WHERE id="'.$_GET['id_message'].'"';
+	$sql = 'UPDATE messages SET signalement_motif ="'.mysqli_escape_string($db,$_GET['motif']).'", signalement_msg = "'.mysqli_escape_string($db,$_GET['message']).'" WHERE id='.$_GET['id_message'].'';
+	echo $sql."<br>";
 	mysqli_query($db,$sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error());
-
 	mysqli_close($db);
-
-	header('Location: signaler.php');
-	exit();
+	echo "<script>alert(\"Merci de nous avoir prévenu, nous nous en occupons.\")</script>";
 	}
 }
 ?>
@@ -188,11 +187,14 @@ echo "<h4>Signaler le message</h4>";
 
 	// si au moins un membre qui n'est pas nous même a été trouvé, on affiche le formulaire d'envoie de message
 	?>
-	<form action="signaler.php" method="post">
-	
-	</select><br />
-	Motif : <input type="text" name="motif" value="<?php if (isset($_POST['motif'])) echo stripslashes(htmlentities(trim($_POST['motif']))); ?>"><br />
-	Message : <textarea name="message"><?php if (isset($_POST['message'])) echo stripslashes(htmlentities(trim($_POST['message']))); ?></textarea><br />
+	<form action="signaler.php" method="get">
+	<?php
+
+	echo '<input type="hidden" name="id_message" value="'.$_GET['id_message'].'">'
+	?>
+	<br />
+	Motif : <input type="text" name="motif" value="<?php if (isset($_GET['motif'])) echo stripslashes(htmlentities(trim($_GET['motif']))); ?>"><br />
+	Message : <textarea name="message"><?php if (isset($_GET['message'])) echo stripslashes(htmlentities(trim($_GET['message']))); ?></textarea><br />
 	<input type="submit" class="bouton" name="go" value="Envoyer">
 	</form>
 	<?php

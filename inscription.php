@@ -10,8 +10,8 @@
           rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css"> -->
-          <link href="./base.css"
-          rel="stylesheet" type="text/css">
+          <!-- <link href="./base.css"
+          rel="stylesheet" type="text/css"> -->
            <link href="./inscription.css"
           rel="stylesheet" type="text/css">
           

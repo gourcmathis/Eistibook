@@ -199,6 +199,8 @@ else {
 
 	// on affiche également un lien permettant de supprimer ce message de la boite de réception
 	echo '<br /><br /><a href="supprimer.php?id_message=' , $_GET['id_message'] , '">Supprimer ce message</a>';
+	echo '<br /><br /><a href="signaler.php?id_message=' , $_GET['id_message'] , '">Signaler ce message</a>';
+	
 	}
 	mysqli_free_result($req);
 	mysqli_close($db);

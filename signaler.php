@@ -9,20 +9,20 @@ if (!isset($_SESSION['login'])) {
 }
 // on teste si le formulaire a bien été soumis
 if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
-	if (empty($_POST['destinataire']) || empty($_POST['titre']) || empty($_POST['message'])) {
-	$erreur = 'Au moins un des champs est vide.';
+	if ( empty($_POST['motif']) ) {
+	$erreur = 'Veuillez rentrer un motif';
 	}
 	else {
 
 	$db = connecterBDD();
 
 	// si tout a été bien rempli, on insère le message dans notre table SQL
-	$sql = 'INSERT INTO messages VALUES("", "'.$_SESSION['id'].'", "'.$_POST['destinataire'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['titre']).'", "'.mysqli_escape_string($db,$_POST['message']).'","","")';
+	$sql = 'UPDATE messages SET (signalement_motif ="'.mysqli_escape_string($db,$_POST['motif']).'"), signalement_msg = "'.mysqli_escape_string($db,$_POST['message']).'" WHERE id="'.$_GET['id_message'].'"';
 	mysqli_query($db,$sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error());
 
 	mysqli_close($db);
 
-	header('Location: messagerie.php');
+	header('Location: signaler.php');
 	exit();
 	}
 }
@@ -45,6 +45,8 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
           rel="stylesheet" type="text/css">
            <link href="./profil.css"
           rel="stylesheet" type="text/css">
+           <link href="./messagerie.css"
+          rel="stylesheet" type="text/css">
 </head>
 
 
@@ -59,6 +61,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 
 <body>
 <!-- <h1 class="titre"> EISTI - BOOK </h1> -->
+<div class="entete">
 <img class="logo" src="EISTIB6.png">
 
 
@@ -107,7 +110,9 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 </div>
 
 
+</div>
 
+<div class="deb"></div>
 
 
 
@@ -174,42 +179,25 @@ if (!empty($amis)) {
 echo "</div>";
 	
 
+
+
+// autres informations et publications	
 echo "<div class='milieu'>";
-?>
-<h4>Envoyer un message :</h4>
+echo "<h4>Signaler le message</h4>";
 
-<?php
-$db= connecterBDD();
-// on prépare une requete SQL selectionnant tous les login des membres du site en prenant soin de ne pas selectionner notre propre login, le tout, servant à alimenter le menu déroulant spécifiant le destinataire du message
-$sql = 'SELECT concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as nom_destinataire, EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS as id_destinataire FROM EISTI_BOOK_UTILISATEUR WHERE ID_UTILISATEURS <> "'.$_SESSION['id'].'" ORDER BY login ASC';
-// on lance notre requete SQL
-$req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
-$nb = mysqli_num_rows ($req);
 
-if ($nb == 0) {
-	// si aucun membre n'a été trouvé, on affiche tout simplement aucun formulaire
-	echo 'Vous êtes le seul membre inscrit.';
-}
-else {
 	// si au moins un membre qui n'est pas nous même a été trouvé, on affiche le formulaire d'envoie de message
 	?>
-	<form action="messagerie.php" method="post">
-	Pour : <select name="destinataire">
-	<?php
-	// on alimente le menu déroulant avec les login des différents membres du site
-	while ($data = mysqli_fetch_array($req)) {
-	echo '<option value="' , $data['id_destinataire'] , '">' , stripslashes(htmlentities(trim($data['nom_destinataire']))) , '</option>';
-	}
-	?>
+	<form action="signaler.php" method="post">
+	
 	</select><br />
-	Titre : <input type="text" name="titre" value="<?php if (isset($_POST['titre'])) echo stripslashes(htmlentities(trim($_POST['titre']))); ?>"><br />
+	Motif : <input type="text" name="motif" value="<?php if (isset($_POST['motif'])) echo stripslashes(htmlentities(trim($_POST['motif']))); ?>"><br />
 	Message : <textarea name="message"><?php if (isset($_POST['message'])) echo stripslashes(htmlentities(trim($_POST['message']))); ?></textarea><br />
-	<input type="submit" name="go" value="Envoyer">
+	<input type="submit" class="bouton" name="go" value="Envoyer">
 	</form>
 	<?php
-}
-mysqli_free_result($req);
-mysqli_close($db);
+
+
 
 echo"</select>";
 
@@ -220,35 +208,8 @@ if (isset($erreur)) echo '<br /><br />',$erreur;
 
 echo "</div>";
 
-
-
-
-// autres informations et publications	
-echo "<br/><div class='milieu'>";
-echo "<h4>Messages reçus</h4>";
-
-$db = connecterBDD();
-
-// on prépare une requete SQL cherchant tous les titres, les dates ainsi que l'auteur des messages pour le membre connecté
-$sql = 'SELECT titre, date, concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as expediteur, messages.id as id_message, id_destinataire FROM messages, EISTI_BOOK_UTILISATEUR WHERE id_destinataire="'.$_SESSION['id'].'" AND id_expediteur=EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS ORDER BY date DESC';
-// lancement de la requete SQL
-$req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
-$nb = mysqli_num_rows($req);
-
-if ($nb == 0) {
-	echo 'Vous n\'avez aucun message.';
-}
-else {
-	// si on a des messages, on affiche la date, un lien vers la page lire.php ainsi que le titre et l'auteur du message
-	while ($data = mysqli_fetch_array($req)) {
-	echo $data['date'] , ' - <a href="lire.php?id_message=' , $data['id_message'] ,'&idDestinataire=',$data['id_destinataire'], '">' , stripslashes(htmlentities(trim($data['titre']))) , '</a> [ Message de ' , stripslashes(htmlentities(trim($data['expediteur']))) , ' ]<br />';
-	}
-}
-mysqli_free_result($req);
-mysqli_close($db);
-
-
 ?>
+
 <!-- TODO 
 	. ajouter les publications récentes de cette personne
 	. mettre en forme les différentes infos

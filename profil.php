@@ -180,6 +180,19 @@ if (!empty($amis)) {
 }
 echo "</div>";
 	
+
+// validation ou erreur après modification du profil 
+echo "<div>";
+if (isset($_GET['valid'])) {
+	if ($_GET['valid']) {
+		echo "Vos modifications ont bien été enrgistrées.";
+	} else {
+		echo "Vos modifications n'ont pas pu être réalisées. Vous pouvez réessayer ou contacter nos services si le problème subsiste.";
+	}
+}	
+echo "</div>";
+
+
 	
 // autres informations et publications	
 echo "	<div class='milieu'>";
@@ -272,11 +285,11 @@ echo "	<h3> Publications par ce profil </h3>
 	";
 } 
 ?>
+
 <!-- TODO 
 	. ajouter les publications récentes de cette personne
 	. mettre en forme les différentes infos
-	. fonction d'édition (nouvelle page similaire)
-	. mettre des liens sur les amis vers leur profil (dans afficher_amis, util.php)
+	. ajouter le diplome 
 	
 -->
 </body>

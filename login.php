@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>EISTI - BOOK </title>
 
-    <link href="./base.css"
-          rel="stylesheet" type="text/css">
-           <link href="./login.css"
+   
+           <!-- <link href="./login.css"
+          rel="stylesheet" type="text/css"> -->
+           <link href="./inscription.css"
           rel="stylesheet" type="text/css">
 </head>
 

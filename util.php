@@ -30,7 +30,7 @@ function getListeEleves() {
 	if (mysqli_num_rows($res) > 0) {
 		$i=0;
 		while($row = mysqli_fetch_assoc($res)) {
-			$lstEleves[$i]= array('prenom'=>$row['PRENOM'], 'nom'=>$row['NOM']) ;
+			$lstEleves[$i]= array('prenom'=>$row['PRENOM'], 'nom'=>$row['NOM'], 'id_util'=>$row['ID_UTILISATEURS']) ;
 			$i++;
 		}
 	} else {

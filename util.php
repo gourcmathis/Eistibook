@@ -25,7 +25,7 @@ function getListeEleves() {
 
 	$lstEleves = [];
 	$db = connecterBDD();
-	$query = "SELECT NOM, PRENOM FROM EISTI_BOOK_UTILISATEUR";
+	$query = "SELECT NOM, PRENOM, ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if (mysqli_num_rows($res) > 0) {
 		$i=0;

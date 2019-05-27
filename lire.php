@@ -15,13 +15,65 @@ if (!isset($_SESSION['login'])) {
 
     <link href="./base.css"
           rel="stylesheet" type="text/css">
-           <link href="./login.css"
+    <link href="./fil.css"
+          rel="stylesheet" type="text/css">
+    <link href="./profil.css"
           rel="stylesheet" type="text/css">
 </head>
 
 <body>
-<a href="profil.php">Home</a></br></br>
-<a href="messagerie.php">Retour</a><br /><br />
+
+<div class="entete">
+<img class="logo" src="EISTIB6.png">
+
+
+
+<div class="section3">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul >
+                   
+                    <li class="menuli" >
+                        <a class="nonlien" href="profil.php?perso=<?php echo $_SESSION['login']; ?>"> Mon profil </a>
+                    </li>
+                    <li class="menuli">
+                        <a class="nonlien" href="publi.php"> Mon fil d'actualité </a>
+                    </li>
+
+		            <li class="menuli">
+                        <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
+                    </li>
+
+		            <li class="menuli">
+                        <a class="nonlien" href="messagerie.php"> Messagerie </a>
+                    </li>
+
+                    <li class="menuli">
+                        <a class="nonlien" href="deco.php"> Me déconnecter </a>
+                    </li>
+
+                    <li  class="menuli">
+                        <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
+                    </li>
+                    
+                   
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+<div class="deb"></div>
+<h2 class="soustitre"> Mon message reçu </h2>
+
+
 <?php
 // on teste si notre paramètre existe bien et qu'il n'est pas vide
 if (!isset($_GET['id_message']) || empty($_GET['id_message'])) {
@@ -52,6 +104,6 @@ else {
 	mysqli_close($db);
 }
 ?>
-<br /><br /><a href="deco.php">Déconnexion</a>
+<br /><br />
 </body>
 </html>

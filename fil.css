@@ -27,3 +27,19 @@
  	padding: 10px;
 
  }
+
+ a {
+ 	color: black;
+ 	text-decoration-line: none;
+ }
+
+ .entete {
+ 	position: fixed;
+ 	background-color: #99ccff;
+ 	width: 100%;
+ }
+
+ 
+ .deb {
+ 	padding-bottom: 250px;
+ }

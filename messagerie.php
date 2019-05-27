@@ -45,6 +45,8 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
           rel="stylesheet" type="text/css">
            <link href="./profil.css"
           rel="stylesheet" type="text/css">
+           <link href="./messagerie.css"
+          rel="stylesheet" type="text/css">
 </head>
 
 
@@ -59,6 +61,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 
 <body>
 <!-- <h1 class="titre"> EISTI - BOOK </h1> -->
+<div class="entete">
 <img class="logo" src="EISTIB6.png">
 
 
@@ -107,7 +110,9 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 </div>
 
 
+</div>
 
+<div class="deb"></div>
 
 
 
@@ -204,7 +209,7 @@ else {
 	</select><br />
 	Titre : <input type="text" name="titre" value="<?php if (isset($_POST['titre'])) echo stripslashes(htmlentities(trim($_POST['titre']))); ?>"><br />
 	Message : <textarea name="message"><?php if (isset($_POST['message'])) echo stripslashes(htmlentities(trim($_POST['message']))); ?></textarea><br />
-	<input type="submit" name="go" value="Envoyer">
+	<input type="submit" class="bouton" name="go" value="Envoyer">
 	</form>
 	<?php
 }

@@ -8,3 +8,26 @@
 .mess {
 	border-style: double;
 }
+
+
+  input, select {
+  font-family : inherit;
+  font-size   : 100%;
+
+  padding:9px 0 9px 0;
+ 	padding-left: 10px;
+ 	padding-right: 10px;
+	font: 13px Arial;
+	background:#8dc0f3;
+	border-radius:2px;
+	/*width:100px;*/
+	border:none;
+	margin: 5px;
+	margin-left: 35px;
+	color: black;
+}
+
+textarea {
+	width: 99%;
+	border-style: none;
+}

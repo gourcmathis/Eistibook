@@ -73,9 +73,11 @@ function insertEleve($formdata) {
 	$query="INSERT INTO EISTI_BOOK_UTILISATEUR (NOM,PRENOM,LOGIN,MDP,NAISSANCE,PROMOTION) VALUES ('$nom', '$prenom', '$email', '$motDePasse','$ddn', '$promo')";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if ($res) { 
-		echo "l'inscription a bien été effectuée" ;
+		echo '<script> alert("l\'inscription a bien été effectuée") </script>';
+		// echo "l'inscription a bien été effectuée" ;
 	} else {
-		echo "il y a eu une erreur";
+		echo '<script> alert("il y a eu une erreur") </script>';
+		// echo "il y a eu une erreur";
 	}
     
 	deconnecterBDD($db);
@@ -107,7 +109,8 @@ function tryLogin($formdata) {
 			}	
 		}
 		if (!$trouve) {
-			echo "vos identifiants sont faux !";
+			// echo "vos identifiants sont faux !";
+			echo '<script> alert("Vos identifiants sont faux !") </script>';
 		}
 	}
 	deconnecterBDD($db);
@@ -120,9 +123,11 @@ function deleteLogin($username) {
 	$query="DELETE FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$username'";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if ($res) { 
-		echo "Votre compte a bien été supprimé." ;
+		echo '<script> alert("Votre compte a bien été supprimé.") </script>';
+		// echo "Votre compte a bien été supprimé." ;
 	} else {
-		echo "Il y a eu une erreur...";
+		echo '<script> alert("Il y a eu une erreur...") </script>';
+		// echo "Il y a eu une erreur...";
 	}
 	deconnecterBDD($db);
 }

@@ -119,7 +119,7 @@ require('util.php');
 		
 	}
 
-// teste la résussite de la manipulation
+// teste la réussite de la manipulation
 	$reus=($res3 && $res_c && $res_co && $res_l && $res_o);
 deconnecterBDD($db);
 

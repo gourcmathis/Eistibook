@@ -102,6 +102,15 @@ if ($acces<>"no") {
 
 ?>
 
+<!-- Mot de passe  -->
+<div class='droit'>
+	<a class="nonlien" href="mdp.php?perso=<?php echo $_SESSION['login']; ?>"> Modifier le mot de passe </a>
+</div>
+
+
+
+
+<!-- toutes les informations du profil -->
 <div class='milieu'>
   <form class='form-horizontal' role='form' action='valider_modif.php' method='POST'>
 	<!-- informations générales, non modifiables -->
@@ -376,12 +385,6 @@ if ($acces<>"no") {
 	<button type="submit" class="bouton">Valider mes modifications</button>
   </form>
 </div>
-
-<!-- TODO 
-	- mettre en forme
-	- cas du mot de passe 
-
--->
 
 
 </body>

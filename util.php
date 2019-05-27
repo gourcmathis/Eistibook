@@ -289,7 +289,7 @@ function chargerOptions() {
 	if (mysqli_num_rows($resComp)>0) {
 		$i=0;
 		while ($row = mysqli_fetch_assoc($resComp)) {
-			$comp[$i]=array($row['NOM'],$row['ID_COMPETENCE']);
+			$comp[$i]=array($row['NOM'],$row['ID_COMPETENCES']);
 			$i++;
 		}
 	}

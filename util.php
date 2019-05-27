@@ -271,7 +271,7 @@ function chargerOptions() {
 	$db = connecterBDD();
 	
 	// on selectionne les options de caractère ... 
-	$queryCa="SELECT * CARACTERE";
+	$queryCa="SELECT * FROM CARACTERE";
 	$resCa = mysqli_query($db, $queryCa) or die('Request error : '.$queryCa);
 	$caract=array();
 	if (mysqli_num_rows($resCa)>0) {

@@ -215,6 +215,10 @@ if (!empty($infos['PROFESSION'])) {
 	echo "</div>";
 }
 
+if (!empty($infos['DIPLOME'])) {
+	echo "<div class='info'>".$infos['PRENOM']." a obtenu le diplome suivant : ".$infos['DIPLOME']."</div>";
+}
+
 if (!empty($infos['VILLE'])) {
 	echo "<div class='info'>".$infos['PRENOM']." habite à ".$infos['VILLE']."</div>";
 }
@@ -269,28 +273,26 @@ if ($acces<>"etranger") {
 	
 } 
 	
+echo "</div></div>";
 
 
-
-echo "	<h3> Publications par ce profil </h3>
-	<p> 
-	 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-	</div>
-	";
-} 
-?>
-
-<!-- TODO 
-	. ajouter les publications récentes de cette personne
-	. mettre en forme les différentes infos
-	. ajouter le diplome 
 	
--->
+
+//publications de ce profil 
+echo "<div class='milieu'>";
+if ($acces=="mypage") {
+	echo "<h3> Mes publications récentes</h3>";
+} else {
+	echo "<h3> Publications récentes de ".$infos['LOGIN']." </h3>";
+}
+
+chargerPubli_profil($infos['PRENOM']." ".$infos['NOM']);
+
+
+echo "</div>";
+
+} 
+
+?>
 </body>
 </html>

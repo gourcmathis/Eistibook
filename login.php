@@ -9,6 +9,7 @@
           rel="stylesheet" type="text/css"> -->
            <link href="./inscription.css"
           rel="stylesheet" type="text/css">
+          <link rel="icon" href="EISTIB7.ico" />
 </head>
 
 <body>

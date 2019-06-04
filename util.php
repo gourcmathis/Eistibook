@@ -25,12 +25,12 @@ function getListeEleves() {
 
 	$lstEleves = [];
 	$db = connecterBDD();
-	$query = "SELECT NOM, PRENOM FROM EISTI_BOOK_UTILISATEUR";
+	$query = "SELECT NOM, PRENOM, ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if (mysqli_num_rows($res) > 0) {
 		$i=0;
 		while($row = mysqli_fetch_assoc($res)) {
-			$lstEleves[$i]= array('prenom'=>$row['PRENOM'], 'nom'=>$row['NOM']) ;
+			$lstEleves[$i]= array('prenom'=>$row['PRENOM'], 'nom'=>$row['NOM'], 'id_util'=>$row['ID_UTILISATEURS']) ;
 			$i++;
 		}
 	} else {
@@ -271,7 +271,7 @@ function chargerOptions() {
 	$db = connecterBDD();
 	
 	// on selectionne les options de caractère ... 
-	$queryCa="SELECT * CARACTERE";
+	$queryCa="SELECT * FROM CARACTERE";
 	$resCa = mysqli_query($db, $queryCa) or die('Request error : '.$queryCa);
 	$caract=array();
 	if (mysqli_num_rows($resCa)>0) {
@@ -289,7 +289,7 @@ function chargerOptions() {
 	if (mysqli_num_rows($resComp)>0) {
 		$i=0;
 		while ($row = mysqli_fetch_assoc($resComp)) {
-			$comp[$i]=array($row['NOM'],$row['ID_COMPETENCE']);
+			$comp[$i]=array($row['NOM'],$row['ID_COMPETENCES']);
 			$i++;
 		}
 	}
@@ -320,6 +320,45 @@ function chargerOptions() {
 	
 	deconnecterBDD($db);
 	return array($caract,$comp,$langues,$outils);
+}
+
+
+
+
+//Charge toutes les publications d'un profil donné 
+function chargerPubli_profil($profil) {
+	$db=connecterBDD();
+	$query = "SELECT auteur, date, texte FROM publication WHERE auteur='".$profil."'ORDER BY date DESC;";
+	$res = mysqli_query($db, $query) or die('Erreur SQL !<br />'.$query.'<br />'.mysqli_error());
+
+	// on compte le nombre de publi correspondant
+	$nb_publi = mysqli_num_rows($res);
+
+	if ($nb_publi == 0) {
+	    echo 'Aucune publication enregistrée.';
+	} else {
+    		// si on a au moins une publi, on l'affiche
+    		while ($data = mysqli_fetch_array($res)) {
+
+    			// on décompose la date
+   			sscanf($data['date'], "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
+
+    			// on affiche les résultats
+   			 echo '<div class="publication" >' ;
+   			 echo '<p class="nom" >' ;
+   			 echo '<br />Publication de : ' , htmlentities(trim($data['auteur'])) , '<br />';
+   			 echo 'Le : ' , $jour , '/' , $mois , '/' , $an , ' à ' , $heure , ':' , $min , ':' , $sec , '<br /><br />';
+   			 echo '</p>' ;
+   			 echo '' , nl2br(htmlentities(trim($data['texte']))) , '<br />';
+   			 echo "</div>";
+    		}
+    	}
+    	
+	// on libère l'espace mémoire alloué à cette requête
+	mysqli_free_result ($res);
+
+	// on ferme la connexion à la base de données
+	mysqli_close ($db);
 }
 
 ?>

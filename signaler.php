@@ -1,21 +1,6 @@
-
-
 <!-- atention, si on ouvre on page de profil, il faut toujours en get la personne dont on regarde le profil -->
 <?php
 require('util.php');
-
-$pageDe=$_SESSION['login'];
-	$acces="mypage";
-
-
-// on charge toutes les infos puis on sélectionne celles qu'il faut afficher
-// if terminé tout en bas de la page
-
-	$tableau=chargerInfos($pageDe);
-	$infos=$tableau[0];
-		
-	$amis=chargerListeAmis($pageDe);
-
 // on vérifie toujours qu'il s'agit d'un membre qui est connecté
 if (!isset($_SESSION['login'])) {
 	// si ce n'est pas le cas, on le redirige vers l'accueil
@@ -23,21 +8,21 @@ if (!isset($_SESSION['login'])) {
 	exit();
 }
 // on teste si le formulaire a bien été soumis
-if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
-	if ( empty($_POST['titre']) || empty($_POST['message'])) {
-	$erreur = 'Au moins un des champs est vide.';
+if (isset($_GET['go']) && $_GET['go'] == 'Envoyer') {
+	if ( empty($_GET['motif']) ) {
+	$erreur = 'Veuillez rentrer un motif';
 	}
 	else {
+
+
 	$db = connecterBDD();
 
 	// si tout a été bien rempli, on insère le message dans notre table SQL
-	$sql = 'INSERT INTO messages VALUES("", "'.$_SESSION['id'].'", "'.$_POST['destinataire'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['titre']).'", "'.mysqli_escape_string($db,$_POST['message']).'")';
+	$sql = 'UPDATE messages SET signalement_motif ="'.mysqli_escape_string($db,$_GET['motif']).'", signalement_msg = "'.mysqli_escape_string($db,$_GET['message']).'" WHERE id='.$_GET['id_message'].'';
+	echo $sql."<br>";
 	mysqli_query($db,$sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error());
-
 	mysqli_close($db);
-
-	header('Location: lire.php');
-	exit();
+	echo "<script>alert(\"Merci de nous avoir prévenu, nous nous en occupons.\")</script>";
 	}
 }
 ?>
@@ -53,28 +38,29 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
           rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css"> -->
-    <link href="./base.css"
+          <link href="./base.css"
           rel="stylesheet" type="text/css">
-    <link href="./fil.css"
+          <link href="./fil.css"
           rel="stylesheet" type="text/css">
-    <link href="./fil.css"
+           <link href="./profil.css"
           rel="stylesheet" type="text/css">
-    <link href="./profil.css" 
-    	  rel="stylesheet" type="text/css">
-    <link href="./lire.css" 
-    	  rel="stylesheet" type="text/css">
+           <link href="./messagerie.css"
+          rel="stylesheet" type="text/css">
 </head>
 
 
+<?php 
 
+
+	$pageDe=$_SESSION['login'];
+	$acces="mypage";
+	
+	
+?>
 
 <body>
-
-
+<!-- <h1 class="titre"> EISTI - BOOK </h1> -->
 <div class="entete">
-
-
-
 <img class="logo" src="EISTIB6.png">
 
 
@@ -109,14 +95,12 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
                         <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
                     </li>
                     
-
                     <?php
                     //TODO faire la fonction éditer le profil
                     if ($acces=="mypage") {
                     	echo "<li  class='menuli'> <a class='nonlien' href='jesaispasencore'> Editer mon profil </a> </li>";
                     }
                     ?>
-
 
                 </ul>
             </div>
@@ -125,14 +109,9 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 </div>
 
 
-
 </div>
 
-
 <div class="deb"></div>
-<h2 class="soustitre"> Messages reçu </h2>
-
-
 
 
 
@@ -140,11 +119,21 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 
 <?php
 
+// on charge toutes les infos puis on sélectionne celles qu'il faut afficher
+// if terminé tout en bas de la page
+
+	$tableau=chargerInfos($pageDe);
+	$infos=$tableau[0];
+		
+	$amis=chargerListeAmis($pageDe);
 
 
 
+echo "  <h2 class='soustitre'>"; 
+echo "Messagerie ";
 
-echo "<div class='gauche'>";
+
+echo "</h2><div class='gauche'>";
 	
 // photo de profil
 if (isset($infos['photo'])) {
@@ -189,86 +178,28 @@ if (!empty($amis)) {
 echo "</div>";
 	
 
+
+
 // autres informations et publications	
 echo "<div class='milieu'>";
+echo "<h4>Signaler le message</h4>";
 
-// on teste si notre paramètre existe bien et qu'il n'est pas vide
-if (!isset($_GET['id_message']) || empty($_GET['id_message'])) {
-	echo 'Aucun message reconnu.';
-}
-else {
-	$db = connecterBDD();
 
-	// on prépare une requete SQL selectionnant la date, le titre et l'expediteur du message que l'on souhaite lire, tout en prenant soin de vérifier que le message appartient bien au membre connecté
-	$sql = 'SELECT titre, date, message, concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as expediteur FROM messages, EISTI_BOOK_UTILISATEUR WHERE id_destinataire="'.$_SESSION['id'].'" AND id_expediteur=EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS AND messages.id="'.$_GET['id_message'].'"';
-	// on lance cette requete SQL à MySQL
-	$req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
-	$nb = mysqli_num_rows($req);
-
-	if ($nb == 0) {
-	echo 'Aucun message reconnu.';
-	}
-	else {
-	// si le message a été trouvé, on l'affiche
-	$data = mysqli_fetch_array($req);
-	echo $data['date'] , ' - ' , stripslashes(htmlentities(trim($data['titre']))) , '</a> [ Message de ' , stripslashes(htmlentities(trim($data['expediteur']))) , ' ]<br /><br />';
-	echo nl2br(stripslashes(htmlentities(trim($data['message']))));
-
-	// on affiche également un lien permettant de supprimer ce message de la boite de réception
-	echo '<ul >
-                   
-            <li class="menuli" >
-              <a class="nonlien" href="supprimer.php?id_message=' , $_GET['id_message'] , '"> Supprimer </a>
-            </li>
-            <li class="menuli" >
-              <a class="nonlien" href="signaler.php?id_message=' , $_GET['id_message'] , '"> Signaler </a>
-            </li>
-      </ul>';
-
-	
-	
-	}
-	mysqli_free_result($req);
-	mysqli_close($db);
-}
-?>
-
-</div>
-<div class='milieu'>
-	<h4>Répondre :</h4>
-
-<?php
-$db= connecterBDD();
-// on prépare une requete SQL selectionnant tous les login des membres du site en prenant soin de ne pas selectionner notre propre login, le tout, servant à alimenter le menu déroulant spécifiant le destinataire du message
-$sql = 'SELECT concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as nom_destinataire, EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS as id_destinataire FROM EISTI_BOOK_UTILISATEUR WHERE ID_UTILISATEURS <> "'.$_SESSION['id'].'" ORDER BY login ASC';
-// on lance notre requete SQL
-$req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
-$nb = mysqli_num_rows ($req);
-
-if ($nb == 0) {
-	// si aucun membre n'a été trouvé, on affiche tout simplement aucun formulaire
-	echo 'Vous êtes le seul membre inscrit.';
-}
-else {
 	// si au moins un membre qui n'est pas nous même a été trouvé, on affiche le formulaire d'envoie de message
 	?>
-	<form action="lire.php" method="post">
-	Pour : <select name="destinataire">
+	<form action="signaler.php" method="get">
 	<?php
-	// on alimente le menu déroulant avec les login des différents membres du site
-	while ($data = mysqli_fetch_array($req)) {
-	echo '<option value="' , $data['id_destinataire'] , '">' , stripslashes(htmlentities(trim($data['nom_destinataire']))) , '</option>';
-	}
+
+	echo '<input type="hidden" name="id_message" value="'.$_GET['id_message'].'">'
 	?>
-	</select><br />
-	Titre : <input type="text" name="titre" value="<?php if (isset($_POST['titre'])) echo stripslashes(htmlentities(trim($_POST['titre']))); ?>"><br />
-	Message : <textarea name="message"><?php if (isset($_POST['message'])) echo stripslashes(htmlentities(trim($_POST['message']))); ?></textarea><br />
-	<input type="submit" name="go" value="Envoyer">
+	<br />
+	Motif : <input type="text" name="motif" value="<?php if (isset($_GET['motif'])) echo stripslashes(htmlentities(trim($_GET['motif']))); ?>"><br />
+	Message : <textarea name="message"><?php if (isset($_GET['message'])) echo stripslashes(htmlentities(trim($_GET['message']))); ?></textarea><br />
+	<input type="submit" class="bouton" name="go" value="Envoyer">
 	</form>
 	<?php
-}
-mysqli_free_result($req);
-mysqli_close($db);
+
+
 
 echo"</select>";
 
@@ -278,6 +209,7 @@ echo"</select>";
 if (isset($erreur)) echo '<br /><br />',$erreur;
 
 echo "</div>";
+
 ?>
 
 <!-- TODO 
@@ -287,6 +219,5 @@ echo "</div>";
 	. mettre des liens sur les amis vers leur profil (dans afficher_amis, util.php)
 	
 -->
-
 </body>
 </html>

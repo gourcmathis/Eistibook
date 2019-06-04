@@ -97,11 +97,20 @@ if ($acces<>"no") {
 	$tableau=chargerInfos($pageDe);
 	$infos=$tableau[0];	
 	$options=chargerOptions();
-
+	$_SESSION['page_modifiee']=$pageDe;
 
 
 ?>
 
+<!-- Mot de passe  -->
+<div class='droit'>
+	<a class="nonlien" href="mdp.php?perso=<?php echo $_SESSION['login']; ?>"> Modifier le mot de passe </a>
+</div>
+
+
+
+
+<!-- toutes les informations du profil -->
 <div class='milieu'>
   <form class='form-horizontal' role='form' action='valider_modif.php' method='POST'>
 	<!-- informations générales, non modifiables -->
@@ -131,7 +140,7 @@ if ($acces<>"no") {
     		<h3>Votre promotion</h3>
 
 			<p>Vous avez redoublé ? Vous pouvez ici changer votre promotion. Séléctionnez votre nouvelle promotion : </p>
-                            <input type="number" class="form-control" id="promo" name="promo" value="<?php echo $infos['PROMOTION']; ?>" required="required" >
+                            <input type="number" class="form-control" id="promo" name="promo" value="<?php echo $infos['PROMOTION']; ?>"  >
 
 	</div> 		
 		
@@ -149,7 +158,7 @@ if ($acces<>"no") {
 		?>
 		<!-- modifier : -->
 			<p>Vous souhaitez modifier votre photo de profil ? Ecrivez ici l'adresse de la photo que vous souhaitez utiliser : </p>
-			<input type="text" class="form-control" id="photo" name="photo" placeholder="poulet.jpg" required="required">
+			<input type="text" class="form-control" id="photo" name="photo" placeholder="poulet.jpg" >
 
 	</div>
 
@@ -165,7 +174,7 @@ if ($acces<>"no") {
 				$cit="";
 			} 
 			?>
-			<textarea id="citation" name="citation" required="required"><?php echo $cit; ?></textarea>
+			<textarea id="citation" name="citation" ><?php echo $cit; ?></textarea>
 
 	</div>
 
@@ -182,10 +191,29 @@ if ($acces<>"no") {
 				$intro="";
 			} 
 			?>
-			<textarea id="intro" name="intro" required="required"><?php echo $intro; ?></textarea>
+			<textarea id="intro" name="intro" ><?php echo $intro; ?></textarea>
 	</div>
 
-	
+
+	<!-- diplome -->
+	<div>
+		<h3>Votre dimplome</h3>
+			<?php
+			if (!empty($infos['DIPLOME'])) {
+				echo "<p>Vous avez optenu un nouveau diplome ? Mettez votre profil à jour : </p> ";
+				$diplo=$infos['DIPLOME'];
+			} else {
+				echo "<p>Indiquez ici le plus haut diplome que vous avez optenu : </p>";
+				$diplo="";
+			} 
+			?>
+			<input type="text" class="form-control" id="diplome" name="diplome" value="<?php echo $diplo; ?>">
+	</div>
+
+
+
+
+
 	<!-- profession -->
 	<div>
 		<h3>Votre profession</h3>
@@ -198,7 +226,7 @@ if ($acces<>"no") {
 				$prof="";
 			} 
 			?>
-			<input type="text" class="form-control" id="profession" name="profession" value="<?php echo $prof; ?>" required="required">
+			<input type="text" class="form-control" id="profession" name="profession" value="<?php echo $prof; ?>">
 	</div>
 
 
@@ -214,7 +242,7 @@ if ($acces<>"no") {
 				$emploi="";
 			} 
 			?>
-			<input type="text" class="form-control" id="emploi" name="emploi" value="<?php echo $emploi; ?>" required="required">
+			<input type="text" class="form-control" id="emploi" name="emploi" value="<?php echo $emploi; ?>">
 	</div>
 
 	
@@ -230,7 +258,7 @@ if ($acces<>"no") {
 				$ville="";
 			} 
 			?>
-			<input type="text" class="form-control" id="ville" name="ville" value="<?php echo $ville; ?>" required="required">
+			<input type="text" class="form-control" id="ville" name="ville" value="<?php echo $ville; ?>" >
 	</div>
 	
 	
@@ -246,7 +274,7 @@ if ($acces<>"no") {
 				$loisir="";
 			} 
 			?>
-			<input type="text" class="form-control" id="loisir" name="loisir" value="<?php echo $loisir; ?>" required="required">
+			<input type="text" class="form-control" id="loisir" name="loisir" value="<?php echo $loisir; ?>" >
 	</div>
 	
 	
@@ -266,7 +294,7 @@ if ($acces<>"no") {
 			foreach ($optCaract as $opt) {
 				$valeur=$opt[0];
 				$id=$opt[1];
-				echo "<label><input type='checkbox' class='form-control' id='".$id."' name='caractere'";
+				echo "<label><input type='checkbox' class='form-control' value='".$id."' name='caractere[]'"; // caractere[] sera un tableau contenant toute sles cases cochées
 				if (in_array($valeur,$caract)) {
 					echo "checked";
 				}
@@ -289,7 +317,7 @@ if ($acces<>"no") {
 			foreach ($optComp as $opt) {
 				$valeur=$opt[0];
 				$id=$opt[1];
-				echo "<label><input type='checkbox' class='form-control' id='".$id."' name='competence'";
+				echo "<label><input type='checkbox' class='form-control' value='".$id."' name='competences[]'";
 				if (in_array($valeur,$comp)) {
 					echo "checked";
 				}
@@ -312,7 +340,7 @@ if ($acces<>"no") {
 			foreach ($optlangues as $opt) {
 				$valeur=$opt[0];
 				$id=$opt[1];
-				echo "<label><input type='checkbox' class='form-control' id='".$id."' name='langues'";
+				echo "<label><input type='checkbox' class='form-control' value='".$id."' name='langues[]'";
 				if (in_array($valeur,$langues)) {
 					echo "checked";
 				}
@@ -336,7 +364,7 @@ if ($acces<>"no") {
 			foreach ($optOutils as $opt) {
 				$valeur=$opt[0];
 				$id=$opt[1];
-				echo "<label><input type='checkbox' class='form-control' id='".$id."' name='outils'";
+				echo "<label><input type='checkbox' class='form-control' value='".$id."' name='outils[]'";
 				if (in_array($valeur,$outils)) {
 					echo "checked";
 				}
@@ -351,66 +379,12 @@ if ($acces<>"no") {
 	
 <?php 	
 
-
-
-echo "<br/><br/>";
-// informations plus privées : 
-if ($acces<>"etranger") {
-	// caractère
-	$caract=$tableau[1];
-	if (!empty($caract)) {
-		echo "<div class='info'><b>CARACTERE : </b>";
-		foreach ($caract as $unit) {
-			echo $unit.", ";
-		}
-		echo "</div>";	
-	}
-	
-	// compétences 
-	$comp=$tableau[2];
-	if (!empty($comp)) {
-		echo "<div class='info'><b>COMPETENCES : </b>";
-		foreach ($comp as $unit) {
-			echo $unit.", ";
-		}
-		echo "</div>";	
-	}
-	
-	// langues parlées
-	$langues=$tableau[3];
-	if (!empty($langues)) {
-		echo "<div class='info'><b>LANGUES PARLEES : </b>";
-		foreach ($langues as $unit) {
-			echo $unit.", ";
-		}
-		echo "</div>";	
-	}
-	
-	// outils maitrisés
-	$outils=$tableau[4];
-	if (!empty($outils)) {
-		echo "<div class='info'><b>OUTILS MAITRISES : </b>";
-		foreach ($outils as $unit) {
-			echo $unit.", ";
-		}
-		echo "</div>";	
-	}
-	
-	
-}	
-
+//fin du if initial
 } 
 ?>
 	<button type="submit" class="bouton">Valider mes modifications</button>
   </form>
 </div>
-
-<!-- TODO 
-	- mettre en forme
-	- fonction pour le bouton valider (autre page) : redirect vers le profil avec un messae  "vos modifications ont bien été enregistrées"
-
-
--->
 
 
 </body>

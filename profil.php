@@ -181,6 +181,19 @@ if (!empty($amis)) {
 }
 echo "</div>";
 	
+
+// validation ou erreur après modification du profil 
+echo "<div>";
+if (isset($_GET['valid'])) {
+	if ($_GET['valid']) {
+		echo "Vos modifications ont bien été enrgistrées.";
+	} else {
+		echo "Vos modifications n'ont pas pu être réalisées. Vous pouvez réessayer ou contacter nos services si le problème subsiste.";
+	}
+}	
+echo "</div>";
+
+
 	
 // autres informations et publications	
 echo "	<div class='milieu'>";
@@ -201,6 +214,10 @@ if (!empty($infos['PROFESSION'])) {
 		echo "chez ".$infos['EMPLOI'];
 	}
 	echo "</div>";
+}
+
+if (!empty($infos['DIPLOME'])) {
+	echo "<div class='info'>".$infos['PRENOM']." a obtenu le diplome suivant : ".$infos['DIPLOME']."</div>";
 }
 
 if (!empty($infos['VILLE'])) {
@@ -257,81 +274,30 @@ if ($acces<>"etranger") {
 	
 } 
 	
+echo "</div></div>";
 
 
+	
 
-echo "	<h3> Publications par ce profil </h3>
-	<p> 
-	 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-	</div>
-	";
+//publications de ce profil 
+echo "<div class='milieu'>";
+if ($acces=="mypage") {
+	echo "<h3> Mes publications récentes</h3>";
+} else {
+	echo "<h3> Publications récentes de ".$infos['LOGIN']." </h3>";
+}
+
+chargerPubli_profil($infos['PRENOM']." ".$infos['NOM']);
+
+
+echo "</div>";
+
 } 
 
 
+
+
 ?>
-<?php
-print_r($_POST);
-	if (isset($_POST['submit'])) {
-	
-	
 
-	$maxsize=1048576;
-$nom = $_FILES['icone']['name'];     //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.png).
-$type = $_FILES['icone']['type'];     //Le type du fichier. Par exemple, cela peut être « image/png ».
-$taille = $_FILES['icone']['size'];     //La taille du fichier en octets.
-$adressetemp = $_FILES['icone']['tmp_name']; //L'adresse vers le fichier uploadé dans le répertoire temporaire.
-$codeerreur = $_FILES['icone']['error'];    //Le code d'erreur, qui permet de savoir si le fichier a bien été uploadé.
-
-if ($_FILES['icone']['error'] > 0) $erreur = "Erreur lors du transfert";
-
-if ($_FILES['icone']['size'] > $maxsize) $erreur = "Le fichier est trop gros";
-
-$val = date('Y-m-d H:i:s');
-echo $val."<br>";
-
-//Créer un dossier 'fichiers/1/'
-
-  mkdir('image/'.$val.'/', 0777, true);
-
- $extension_upload = 'jpeg';
-
-//Créer un identifiant difficile à deviner
-
-  $nom = 'bonjour';
-
-echo "$type";
-  $nom = 'image/'.$val.'/'."bonjour.{$extension_upload}";
-
-$resultat = move_uploaded_file($_FILES['icone']['tmp_name'],$nom);
-echo "<script>alert(\"la variable est nulle\")</script>";
-
-}
-	else {
-		echo "rien";}
-	?>
-<div>
-	<form method="post" action="profil.php?perso=<?php echo $_SESSION['login']; ?>" enctype="multipart/form-data">
-		<label for="icone">Icône du fichier (JPG, PNG ou GIF | max. 1Mo) :</label><br />
-     	<input type="file" name="icone" id="icone" value="1048576" /><br />
-     	<input type="submit" name="submit" id="env" value="Envoyer" />
-	</form>
-
-
-
-</div>
-
-<!-- TODO 
-	. ajouter les publications récentes de cette personne
-	. mettre en forme les différentes infos
-	. fonction d'édition (nouvelle page similaire)
-	. mettre des liens sur les amis vers leur profil (dans afficher_amis, util.php)
-	
--->
 </body>
 </html>

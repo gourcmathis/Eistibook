@@ -17,7 +17,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 	$db = connecterBDD();
 
 	// si tout a été bien rempli, on insère le message dans notre table SQL
-	$sql = 'INSERT INTO messages VALUES("", "'.$_SESSION['id'].'", "'.$_POST['destinataire'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['titre']).'", "'.mysqli_escape_string($db,$_POST['message']).'")';
+	$sql = 'INSERT INTO messages VALUES("", "'.$_SESSION['id'].'", "'.$_POST['destinataire'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['titre']).'", "'.mysqli_escape_string($db,$_POST['message']).'","","")';
 	mysqli_query($db,$sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error());
 
 	mysqli_close($db);
@@ -45,7 +45,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
           rel="stylesheet" type="text/css">
            <link href="./profil.css"
           rel="stylesheet" type="text/css">
-           <link href="./messagerie.css"
+          <link href="./messagerie.css"
           rel="stylesheet" type="text/css">
           <link rel="icon" href="EISTIB7.ico" />
 </head>
@@ -62,7 +62,6 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 
 <body>
 <!-- <h1 class="titre"> EISTI - BOOK </h1> -->
-<div class="entete">
 <img class="logo" src="EISTIB6.png">
 
 
@@ -111,9 +110,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 </div>
 
 
-</div>
 
-<div class="deb"></div>
 
 
 
@@ -247,7 +244,7 @@ if ($nb == 0) {
 else {
 	// si on a des messages, on affiche la date, un lien vers la page lire.php ainsi que le titre et l'auteur du message
 	while ($data = mysqli_fetch_array($req)) {
-	echo $data['date'] , ' - <a href="lire.php?id_message=' , $data['id_message'] , '">' , stripslashes(htmlentities(trim($data['titre']))) , '</a> [ Message de ' , stripslashes(htmlentities(trim($data['expediteur']))) , ' ]<br />';
+	echo $data['date'] , ' - <a class="messa" href="lire.php?id_message=' , $data['id_message'] ,'&idDestinataire=',$data['id_destinataire'], '">' , stripslashes(htmlentities(trim($data['titre']))) , '</a> [ Message de ' , stripslashes(htmlentities(trim($data['expediteur']))) , ' ]<br />';
 	}
 }
 mysqli_free_result($req);

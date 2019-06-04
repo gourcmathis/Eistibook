@@ -1,4 +1,4 @@
-<!-- atention, si on ouvre on page de profil, il faut toujours en get la personne dont on regarde le profil -->
+
 <?php
 require('util.php');
 // on vérifie toujours qu'il s'agit d'un membre qui est connecté
@@ -232,7 +232,7 @@ echo "<h4>Messages reçus</h4>";
 $db = connecterBDD();
 
 // on prépare une requete SQL cherchant tous les titres, les dates ainsi que l'auteur des messages pour le membre connecté
-$sql = 'SELECT titre, date, concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as expediteur, messages.id as id_message, id_destinataire FROM messages, EISTI_BOOK_UTILISATEUR WHERE id_destinataire="'.$_SESSION['id'].'" AND id_expediteur=EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS ORDER BY date DESC';
+$sql = 'SELECT *, titre, date, concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as expediteur, messages.id as id_message, id_destinataire FROM AMIS, messages, EISTI_BOOK_UTILISATEUR WHERE AMIS.ID_UTILISATEURS=id_destinataire AND ID_AMIS=id_expediteur AND BLOQUE=0 AND id_destinataire="'.$_SESSION['id'].'" AND id_expediteur=EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS ORDER BY date DESC';
 // lancement de la requete SQL
 $req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
 $nb = mysqli_num_rows($req);
@@ -243,7 +243,7 @@ if ($nb == 0) {
 else {
 	// si on a des messages, on affiche la date, un lien vers la page lire.php ainsi que le titre et l'auteur du message
 	while ($data = mysqli_fetch_array($req)) {
-	echo $data['date'] , ' - <a class="messa" href="lire.php?id_message=' , $data['id_message'] ,'&idDestinataire=',$data['id_destinataire'], '">' , stripslashes(htmlentities(trim($data['titre']))) , '</a> [ Message de ' , stripslashes(htmlentities(trim($data['expediteur']))) , ' ]<br />';
+	echo $data['date'] , ' - <a class="messa" href="lire.php?id_message=' , $data['id_message'] ,'&iDdestinataire=',$data['id_destinataire'],'&iDexpediteur=',$data['id_expediteur'], '">' , stripslashes(htmlentities(trim($data['titre']))) , '</a> [ Message de ' , stripslashes(htmlentities(trim($data['expediteur']))) , ' ]<br />';
 	}
 }
 mysqli_free_result($req);

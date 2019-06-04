@@ -59,6 +59,7 @@ if (isset($_POST['go']) && $_POST['go']=='Poster') {
           rel="stylesheet" type="text/css">
            <link href="./actualite.css"
           rel="stylesheet" type="text/css">
+          <link rel="icon" href="EISTIB7.ico" />
 </head>
 
 

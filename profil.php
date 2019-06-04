@@ -20,6 +20,7 @@ require("util.php");
           rel="stylesheet" type="text/css">
            <link href="./profil.css"
           rel="stylesheet" type="text/css">
+          <link rel="icon" href="EISTIB7.ico" />
 </head>
 
 
@@ -293,6 +294,10 @@ echo "</div>";
 
 } 
 
+
+
+
 ?>
+
 </body>
 </html>

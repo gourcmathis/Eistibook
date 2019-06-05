@@ -16,7 +16,7 @@ require('util.php');
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	$infos=mysqli_fetch_assoc($res);
 	$signalements=$infos['SIGNALEMENT'];
-	$blocages=$infos['BLOCAGE'];
+	$blocages=$infos['BAN'];
 	$id=$infos['ID_UTILISATEURS'];
 	$mur=$infos['MUR'];
 	$nom=$infos['NOM'];

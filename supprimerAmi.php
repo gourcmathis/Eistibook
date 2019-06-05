@@ -13,10 +13,11 @@ $query="DELETE FROM AMIS WHERE AMIS.ID_UTILISATEURS= (SELECT ID_UTILISATEURS FRO
 $res = mysqli_query($db, $query) or die('Request error : '.$query);
 
 if ($res) {
-	echo "Cette personne a bien été suprimmée de vos amis.";
+	echo "True";
 } else {
-	echo "Ca n'a pas marché. ";
+	echo "False";
 } 
+
 
 
 

@@ -13,10 +13,11 @@ $query="INSERT INTO AMIS VALUES ( (SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILIS
 $res = mysqli_query($db, $query) or die('Request error : '.$query);
 
 if ($res) {
-	echo "Vous avez un nouvel ami";
+	echo "True";
 } else {
-	echo "Ca n'a pas marché";
+	echo "False";
 } 
+
 
 
 

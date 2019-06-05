@@ -1,6 +1,45 @@
 <?php 
 require('util.php');
 
+
+
+	$maxsize=1048576;
+	print_r($_FILES);
+$nom = $_FILES['photo']['name'];     //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.png$type = $_FILES['photo']['type'];     //Le type du fichier. Par exemple, cela peut être « image/png ».
+$taille = $_FILES['photo']['size'];     //La taille du fichier en octets.
+$adressetemp = $_FILES['photo']['tmp_name']; //L'adresse vers le fichier uploadé dans le répertoire temporaire.
+$codeerreur = $_FILES['photo']['error'];    //Le code d'erreur, qui permet de savoir si le fichier a bien été uploadé.
+
+if ($_FILES['photo']['error'] > 0) $erreur = "Erreur lors du transfert";
+
+if ($_FILES['photo']['size'] > $maxsize) $erreur = "Le fichier est trop gros";
+
+$val = date('Y-m-d H:i:s');
+echo $val."<br>";
+
+//Créer un dossier 'fichiers/1/'
+
+  mkdir('image/'.$val.'/', 0777, true);
+  chmod('image/', 0755);
+  chmod('image/'.$val.'/', 0755);
+
+
+
+ $extension_upload = 'jpg';
+
+//Créer un identifiant difficile à deviner
+
+  $nomP = 'bonjour';
+
+
+  $nomP = 'image/'.$val.'/'."bonjour.{$extension_upload}";
+  
+ 
+$resultat = move_uploaded_file($_FILES['photo']['tmp_name'],$nomP);
+chmod('image/'.$val.'/'."bonjour.{$extension_upload}", 0755);
+if ($resultat) {
+  	echo "OK";  }
+
 // cette page permet de valider des modifications dans un profil
 
 
@@ -61,7 +100,7 @@ require('util.php');
 	if ($resf) {
 		
 		// requete Utilisateur
-			$query3="INSERT INTO EISTI_BOOK_UTILISATEUR VALUES ('".$type."', '".$nom."', '".$prenom."', '".$login."','".$_POST['profession']."', '".$_POST['ville']."', '".$_POST['intro']."', '".$_POST['citation']."', '".$_POST['loisir']."', '".$sexe."', '".$_POST['photo']."', '".$_POST['emploi']."', '".$_POST['diplome']."', '".$mdp."', '".$id."', '".$signalements."', '".$blocages."', '".$mur."', '".$naissance."', '".$_POST['promo']."');";
+			$query3="INSERT INTO EISTI_BOOK_UTILISATEUR VALUES ('".$type."', '".$nom."', '".$prenom."', '".$login."','".$_POST['profession']."', '".$_POST['ville']."', '".$_POST['intro']."', '".$_POST['citation']."', '".$_POST['loisir']."', '".$sexe."', '".$nomP."', '".$_POST['emploi']."', '".$_POST['diplome']."', '".$mdp."', '".$id."', '".$signalements."', '".$blocages."', '".$mur."', '".$naissance."', '".$_POST['promo']."');";
 		$res3 = mysqli_query($db, $query3) or die('Request error : '.$query3);
 		
 		// requête caractère 

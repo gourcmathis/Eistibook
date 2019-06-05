@@ -140,8 +140,8 @@ if ($acces=="mypage") {
 echo "</h2><div class='gauche'>";
 	
 // photo de profil
-if (isset($infos['photo'])) {
-	$src=$infos['photo'];
+if (isset($infos['PHOTO'])) {
+	$src=$infos['PHOTO'];
 	echo "<p><img class='photoprofil' src='".$src."'></img></p>";
 } else {
 	echo "<p><img class='photoprofil' src='poulet.jpg'></img></p>";
@@ -183,15 +183,15 @@ echo "</div>";
 	
 
 // validation ou erreur après modification du profil 
-echo "<div>";
-if (isset($_GET['valid'])) {
-	if ($_GET['valid']) {
-		echo "Vos modifications ont bien été enrgistrées.";
-	} else {
-		echo "Vos modifications n'ont pas pu être réalisées. Vous pouvez réessayer ou contacter nos services si le problème subsiste.";
-	}
-}	
-echo "</div>";
+// echo "<div>";
+// if (isset($_GET['valid'])) {
+// 	if ($_GET['valid']) {
+// 		echo "Vos modifications ont bien été enrgistrées.";
+// 	} else {
+// 		echo "Vos modifications n'ont pas pu être réalisées. Vous pouvez réessayer ou contacter nos services si le problème subsiste.";
+// 	}
+// }	
+// echo "</div>";
 
 
 	

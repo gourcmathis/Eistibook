@@ -112,7 +112,7 @@ if ($acces<>"no") {
 
 <!-- toutes les informations du profil -->
 <div class='milieu'>
-  <form class='form-horizontal' role='form' action='valider_modif.php' method='POST'>
+  <form class='form-horizontal' role='form' action='valider_modif.php' method='POST' enctype="multipart/form-data" >
 	<!-- informations générales, non modifiables -->
 	<div>
 		<?php
@@ -142,7 +142,7 @@ if ($acces<>"no") {
 			<p>Vous avez redoublé ? Vous pouvez ici changer votre promotion. Séléctionnez votre nouvelle promotion : </p>
                             <input type="number" class="form-control" id="promo" name="promo" value="<?php echo $infos['PROMOTION']; ?>"  >
 
-	</div> 		
+		</div> 		
 		
 		
 	<!-- photo de profil -->
@@ -158,7 +158,19 @@ if ($acces<>"no") {
 		?>
 		<!-- modifier : -->
 			<p>Vous souhaitez modifier votre photo de profil ? Ecrivez ici l'adresse de la photo que vous souhaitez utiliser : </p>
-			<input type="text" class="form-control" id="photo" name="photo" placeholder="poulet.jpg" >
+			<input type="text" class="form-control" id="photo2" name="photo2" placeholder="poulet.jpg" >
+			
+	
+<div>
+	
+		<label for="photo">Icône du fichier (JPG, PNG ou GIF | max. 1Mo) :</label><br />
+     	<input type="file" name="photo" id="photo" value="1048576" /><br />
+     	<!-- <input type="submit" name="submit" id="env" value="Envoyer" /> -->
+	
+
+
+
+</div>
 
 	</div>
 

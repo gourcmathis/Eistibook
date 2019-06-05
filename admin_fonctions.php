@@ -182,5 +182,58 @@ function modifInfo($id_util, $cle, $valeur) {
 }
 
 
+function chargeSignalement() {			//Retourne un tableau contenant l'id de l'expéditeur, l'id du destinataire, la date, le titre et le contenu de tous les messages qui ont été signalés par un utilisateur ainsi que le motif du signalement.
+	$db=connecterBDD();
+	$query = "SELECT * FROM `messages` WHERE `signalement_motif`<>'' OR `signalement_msg`<>''";
+	$res = mysqli_query($db, $query) or die('Erreur SQL !<br />'.$query.'<br />'.mysqli_error());
+	$tabSignal=[];
+	if (mysqli_num_rows($res) > 0) {
+    	while($row = mysqli_fetch_assoc($res)) {
+      	array_push($tabSignal, $row);
+      
+}
+}
+deconnecterBDD($db);
+      return $tabSignal;
+}
+
+
+function getUserList() {                    //Retourne un tableau contenant le nom, le prénom et l'id de tous les utilisateurs sachant que les administrateurs ne sont pas considérés comme des utilisateurs 
+
+	$lstUser = [];
+	$db = connecterBDD();
+	$query = "SELECT NOM, PRENOM, ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE TYPE<>'admin'";
+	$res = mysqli_query($db, $query) or die('Request error : '.$query);
+	if (mysqli_num_rows($res) > 0) {
+		$i=0;
+		while($row = mysqli_fetch_assoc($res)) {
+			$lstUser[$i]= array('prenom'=>$row['PRENOM'], 'nom'=>$row['NOM'], 'id_util'=>$row['ID_UTILISATEURS']) ;
+			$i++;
+		}
+	} else {
+    		echo "No results";
+    	}
+	deconnecterBDD($db);
+	return $lstUser;
+}
+
+
+function chargeMessagerie($id_util) {           //Retourne un tableau contenant tous les messages reçus par l'utilisateur dont son id est entré en paramètre
+	$lstMesg = [];
+	$db = connecterBDD();
+	$query = "SELECT * FROM `messages` WHERE id_destinataire='$id_util'";
+	$res = mysqli_query($db, $query) or die('Request error : '.$query);
+	if (mysqli_num_rows($res) > 0) {
+		$i=0;
+		while($row = mysqli_fetch_assoc($res)) {
+			$lstMesg[$i]= array('id'=>$row['id'], 'id_expediteur'=>$row['id_expediteur'], 'id_destinataire'=>$row['id_destinataire'], 'date'=>$row['date'], 'titre'=>$row['titre'], 'message'=>$row['message']) ;
+			$i++;
+		}
+	} else {
+    		echo "Messagerie vide !";
+    	}
+	deconnecterBDD($db);
+	return $lstMesg;
+}
 
 ?>

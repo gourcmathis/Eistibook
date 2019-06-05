@@ -150,6 +150,11 @@ function supprimerAmi(login) {
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
                     </li>
+                    <?php
+                    
+                      echo "<li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=".$_SESSION['login']."'> Editer mon profil </a> </li>";
+                    
+                    ?>
 
                 </ul>
             </div>

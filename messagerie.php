@@ -96,11 +96,11 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
                         <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
                     </li>
                     
+                   
                     <?php
-                    //TODO faire la fonction éditer le profil
-                    if ($acces=="mypage") {
-                    	echo "<li  class='menuli'> <a class='nonlien' href='jesaispasencore'> Editer mon profil </a> </li>";
-                    }
+                    
+                    	echo "<li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=".$_SESSION['login']."'> Editer mon profil </a> </li>";
+                    
                     ?>
 
                 </ul>
@@ -135,8 +135,8 @@ echo "Messagerie ";
 echo "</h2><div class='gauche'>";
 	
 // photo de profil
-if (isset($infos['photo'])) {
-	$src=$infos['photo'];
+if (isset($infos['PHOTO'])) {
+	$src=$infos['PHOTO'];
 	echo "<p><img class='photoprofil' src='".$src."'></img></p>";
 } else {
 	echo "<p><img class='photoprofil' src='poulet.jpg'></img></p>";

@@ -82,7 +82,7 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
                     </li>
 
 		            <li class="menuli">
-                        <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
+                        <a class="nonlien" href="amis.php"> Gérer mes amitiés</a>
                     </li>
 
 		            <li class="menuli">

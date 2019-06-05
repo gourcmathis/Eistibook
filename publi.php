@@ -1,4 +1,3 @@
-
 <?php
 require('util.php');
 $pageDe=$_SESSION['login'];
@@ -87,7 +86,7 @@ if (isset($_POST['go']) && $_POST['go']=='Poster') {
                     </li>
 
 		            <li class="menuli">
-                        <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
+                        <a class="nonlien" href="amis.php"> Gérer mes amitiés </a>
                     </li>
 
 		          

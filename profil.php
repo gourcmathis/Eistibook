@@ -179,6 +179,13 @@ if (!empty($amis)) {
 		echo "Cet utilisateur n'a pas d'amis enregistré.";
 	} 
 }
+if (isset($_GET['valid'])) {
+	if ($_GET['valid']) {
+		echo "<script>alert(\"Vos modifications ont bien été enrgistrées.\")</script>"; 
+	} else {
+		echo "<script>alert(\"Vos modifications n'ont pas pu être réalisées. Vous pouvez réessayer ou contacter nos services si le problème subsiste.\")</script>";  
+}	
+}
 echo "</div>";
 	
 

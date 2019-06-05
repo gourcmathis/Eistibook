@@ -164,7 +164,7 @@ if ($acces<>"no") {
 <div>
 	
 		<label for="photo">Icône du fichier (JPG, PNG ou GIF | max. 1Mo) :</label><br />
-     	<input type="file" name="photo" id="photo" value="1048576" /><br />
+     	<input type="file" name="photo" id="photo"  /><br />
      	<!-- <input type="submit" name="submit" id="env" value="Envoyer" /> -->
 	
 

@@ -27,7 +27,7 @@ require("util.php");
 <?php 
 
 if (empty($_GET) || !existe($_GET["perso"]) ) { 
-	echo "<div class='error'>Cette page n'existe pas. </div>";
+	echo "<script>alert(\"Cette page n'existe pas.\")</script>";
 	$acces='none';
 	// même message dans le cas où la page de profil recherchée n'existe pas ? 
 } else {
@@ -36,7 +36,7 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
 	
 	// vérifier que la personne connectée est un utilisateur (si visiteur ou session vide : message d'erreur)
 	if (empty($_SESSION) || $_SESSION['type']=='visiteur') {
-		echo "<div class='error'> Vous ne pouvez pas accéder à cette page, veuillez vous connecter. </div>";
+		echo "<script>alert(\"Vous ne pouvez pas accéder à cette page, veuillez vous connecter.\")</script>";
 		$acces='none';
 		
 	} elseif ($_SESSION['type']=='admin') {

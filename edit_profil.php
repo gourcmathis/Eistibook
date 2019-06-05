@@ -148,18 +148,7 @@ if ($acces<>"no") {
 	<!-- photo de profil -->
 	<div> 
 		<h3>Votre photo de profil</h3>
-		<?php
-		if (isset($infos['PHOTO'])) {
-			$src=$infos['PHOTO'];
-			echo "<p><img class='photoprofil' src='".$src."'></img></p>";
-		} else {
-			echo "<p><img class='photoprofil' src='poulet.jpg'></img></p><p> Vous n'avez pas de photo de profil. </p>";
-		}
-		?>
-		<!-- modifier : -->
-			<p>Vous souhaitez modifier votre photo de profil ? Ecrivez ici l'adresse de la photo que vous souhaitez utiliser : </p>
-			<input type="text" class="form-control" id="photo2" name="photo2" placeholder="poulet.jpg" >
-			
+		
 	
 <div>
 	

@@ -71,7 +71,12 @@ function ajouterAmi(nom) {
      		// On ne fait quelque chose que si on a tout reçu
     		// et que le serveur est ok
      		if (xhr.readyState == 4 && xhr.status == 200){
-     			document.getElementById("results").innerHTML= xhr.responseText;
+     			if (  xhr.responseText == 1) {  alert("Vous avez un nouvel ami(e) :) !!!!"); }
+          else {
+
+          alert("Ceci n'a pas fonctionné");
+          }
+         
      		}
   	}
   	
@@ -88,7 +93,11 @@ function supprimerAmi(login) {
      		// On ne fait quelque chose que si on a tout reçu
     		// et que le serveur est ok
      		if (xhr.readyState == 4 && xhr.status == 200){
-     			document.getElementById("results").innerHTML= xhr.responseText;
+          if (  xhr.responseText == 1) {  alert("Vous avez perdu un ami(e) :'(  !!!!"); }
+          else {
+
+          alert("Ceci n'a pas fonctionné");
+          }
      		}
   	}
 }

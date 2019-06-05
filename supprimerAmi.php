@@ -12,13 +12,7 @@ $query="DELETE FROM AMIS WHERE AMIS.ID_UTILISATEURS= (SELECT ID_UTILISATEURS FRO
 
 $res = mysqli_query($db, $query) or die('Request error : '.$query);
 
-if ($res) {
-	echo "True";
-} else {
-	echo "False";
-} 
-
-
+echo $res;
 
 
 deconnecterBDD($db);

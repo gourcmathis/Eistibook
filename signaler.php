@@ -19,7 +19,7 @@ if (isset($_GET['go']) && $_GET['go'] == 'Envoyer') {
 
 	// si tout a été bien rempli, on insère le message dans notre table SQL
 	$sql = 'UPDATE messages SET signalement_motif ="'.mysqli_escape_string($db,$_GET['motif']).'", signalement_msg = "'.mysqli_escape_string($db,$_GET['message']).'" WHERE id='.$_GET['id_message'].'';
-	echo $sql."<br>";
+	
 	mysqli_query($db,$sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error());
 	mysqli_close($db);
 	echo "<script>alert(\"Merci de nous avoir prévenu, nous nous en occupons.\")</script>";

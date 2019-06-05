@@ -1,4 +1,3 @@
-
 /* Ensemble des fonctions JavaScript permettant de faire fonctionner la page admin.php */
 
 function getXhr() {
@@ -148,6 +147,34 @@ function supprAccount() {                           //Supprime le compte de l'ut
        }
     }
   xhr.open("POST","admin_delete.php",true);
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+  xhr.send("id_util="+id_util);
+}
+
+function changeBan(val) {                           //Bannit le compte de l'utilisateur sélectionné : "val" prend 0 ou 1, dans le premier cas on retire le bannissement et quand "val" vaut 1 on bannit l'utilisateur 
+  xhr = getXhr();
+  id_util=document.getElementById('eleve').value;      //Récupération de l'id de l'utilisateur
+  xhr.onreadystatechange = function sup() {
+    if (xhr.readyState == 4 && xhr.status == 200){
+      res=xhr.responseText; 
+      document.getElementById('ban').innerHTML=res;
+       }
+    }
+  xhr.open("POST","admin_ban.php",true);
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+  xhr.send("id_util="+id_util+"&val="+val);
+}
+
+function getMessagerie() {  // récupère le contenu de la messagerie de l'utilisateur sélectionné
+  xhr = getXhr();
+  id_util=document.getElementById('eleve').value;      //Récupération de l'id de l'utilisateur
+  xhr.onreadystatechange = function sup() {
+    if (xhr.readyState == 4 && xhr.status == 200){
+      res=xhr.responseText; 
+      document.getElementById('msg').innerHTML=res;
+       }
+    }
+  xhr.open("POST","admin_messagerie.php",true);
   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
   xhr.send("id_util="+id_util);
 }

@@ -27,19 +27,13 @@ require("util.php");
 
 //Lors de la soumission des données du formulaire, insérer le nouvel abonné
 if (isset($_POST['nom']) && isset($_POST['prenom'])) {
-$tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST['ddn'],'email' => $_POST['email'],'promo' => $_POST['promo'],'password' => $_POST['password']);
+$tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST['ddn'],'email' => $_POST['email'],'promo' => $_POST['promo'],'password' => ($_POST['password']));
 
 	// ajoute le nouvel élève à la bdd
 	insertEleve($tab);
 
-	//crée les données de session
-	$_SESSION["login"]=$_POST['email'];
-	$_SESSION["password"]=$_POST['password'];
-	$_SESSION["type"]="utilisateur";
-
-	// redirige vers la page de profil de la personne
-	$perso=$_POST['email'];
-	echo "<script>document.location.replace('profil.php?perso=".$perso."')</script>";}
+	
+	echo "<script>document.location.replace('login.php')</script>";}
 
 
 ?>

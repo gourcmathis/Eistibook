@@ -44,12 +44,12 @@ function getInfos() {
 
 	$lstInfos = [];
 	$db = connecterBDD();
-	$query = "SELECT TYPE, NOM, PRENOM, LOGIN, PROFESSION, VILLE, INTRO, CITATION, LOISIR, SEXE, PHOTO, EMPLOIS, DIPLOME, MDP, ID_UTILISATEURS, SIGNALEMENT, BLOCAGE, MUR, NAISSANCE, PROMOTION FROM EISTI_BOOK_UTILISATEUR";
+	$query = "SELECT TYPE, NOM, PRENOM, LOGIN, PROFESSION, VILLE, INTRO, CITATION, LOISIR, SEXE, PHOTO, EMPLOIS, DIPLOME, MDP, ID_UTILISATEURS, SIGNALEMENT, BAN, MUR, NAISSANCE, PROMOTION FROM EISTI_BOOK_UTILISATEUR";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if (mysqli_num_rows($res) > 0) {
 		$i=0;
 		while($row = mysqli_fetch_assoc($res)) {
-			$lstInfos[$i]= array('type'=>$row['TYPE'], 'nom'=>$row['NOM'], 'prenom'=>$row['PRENOM'], 'login'=>$row['LOGIN'], 'profession'=>$row['PROFESSION'], 'ville'=>$row['VILLE'], 'intro'=>$row['INTRO'], 'citation'=>$row['CITATION'], 'loisir'=>$row['LOISIR'], 'sexe'=>$row['SEXE'], 'photo'=>$row['PHOTO'], 'emplois'=>$row['EMPLOIS'], 'diplome'=>$row['DIPLOME'], 'mdp'=>$row['MDP'], 'id_utilisateurs'=>$row['ID_UTILISATEURS'], 'signalement'=>$row['SIGNALEMENT'], 'blocage'=>$row['BLOCAGE'], 'mur'=>$row['MUR'], 'naissance'=>$row['NAISSANCE'], 'promotion'=>$row['PROMOTION']) ;
+			$lstInfos[$i]= array('type'=>$row['TYPE'], 'nom'=>$row['NOM'], 'prenom'=>$row['PRENOM'], 'login'=>$row['LOGIN'], 'profession'=>$row['PROFESSION'], 'ville'=>$row['VILLE'], 'intro'=>$row['INTRO'], 'citation'=>$row['CITATION'], 'loisir'=>$row['LOISIR'], 'sexe'=>$row['SEXE'], 'photo'=>$row['PHOTO'], 'emplois'=>$row['EMPLOIS'], 'diplome'=>$row['DIPLOME'], 'mdp'=>$row['MDP'], 'id_utilisateurs'=>$row['ID_UTILISATEURS'], 'signalement'=>$row['SIGNALEMENT'], 'ban'=>$row['BAN'], 'mur'=>$row['MUR'], 'naissance'=>$row['NAISSANCE'], 'promotion'=>$row['PROMOTION']) ;
 			$i++;
 		}
 	} else {

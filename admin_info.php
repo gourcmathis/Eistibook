@@ -47,7 +47,7 @@ include("admin_fonctions.php");
 	echo "Emplois : ".$tabInfos[$i]['emplois']."<br>";
 	echo "Diplomes : ".$tabInfos[$i]['diplome']."<br>";
 	echo "Signalement : ".$tabInfos[$i]['signalement']."<br>";
-	echo "Blocage (0 correspond à non-bloqué) : ".$tabInfos[$i]['blocage']."<br>";
+	echo "Banni (0 correspond à non-banni) : ".$tabInfos[$i]['ban']."<br>";
 	echo "Mur : ".$tabInfos[$i]['mur']."<br>";
 	echo "Date de naissance : ".$tabInfos[$i]['naissance']."<br>";
 	echo "Année de promotion : ".$tabInfos[$i]['promotion']."<br>";

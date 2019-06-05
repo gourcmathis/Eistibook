@@ -12,12 +12,7 @@ $query="INSERT INTO AMIS VALUES ( (SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILIS
 
 $res = mysqli_query($db, $query) or die('Request error : '.$query);
 
-if ($res) {
-	echo "True";
-} else {
-	echo "False";
-} 
-
+echo $res;
 
 
 

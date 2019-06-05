@@ -2,7 +2,8 @@
 
 
 require('util.php');
-$login= $_POST['login'];
+
+$login=  $_SESSION['login']; //$_POST['login'];
 
 $tableau = chargerListeAmis($login);
 

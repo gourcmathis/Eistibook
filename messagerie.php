@@ -184,14 +184,14 @@ echo "<div class='milieu'>";
 <?php
 $db= connecterBDD();
 // on prépare une requete SQL selectionnant tous les login des membres du site en prenant soin de ne pas selectionner notre propre login, le tout, servant à alimenter le menu déroulant spécifiant le destinataire du message
-$sql = 'SELECT concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as nom_destinataire, EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS as id_destinataire FROM EISTI_BOOK_UTILISATEUR WHERE ID_UTILISATEURS <> "'.$_SESSION['id'].'" ORDER BY login ASC';
+$sql = 'SELECT *, concat(EISTI_BOOK_UTILISATEUR.NOM," ",EISTI_BOOK_UTILISATEUR.PRENOM) as nom_destinataire, EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS as id_destinataire FROM AMIS, EISTI_BOOK_UTILISATEUR WHERE AMIS.ID_UTILISATEURS="'.$_SESSION['id'].'"  AND ID_AMIS=EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS AND EISTI_BOOK_UTILISATEUR.ID_UTILISATEURS <> "'.$_SESSION['id'].'" ORDER BY login ASC';
 // on lance notre requete SQL
 $req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
 $nb = mysqli_num_rows ($req);
 
 if ($nb == 0) {
 	// si aucun membre n'a été trouvé, on affiche tout simplement aucun formulaire
-	echo 'Vous êtes le seul membre inscrit.';
+	echo "Vous êtes le seul membre inscrit ou vous n'avez pas encore d'amis.";
 }
 else {
 	// si au moins un membre qui n'est pas nous même a été trouvé, on affiche le formulaire d'envoie de message

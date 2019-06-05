@@ -7,8 +7,11 @@ $login=  $_SESSION['login']; //$_POST['login'];
 
 $tableau = chargerListeAmis($login);
 
-affichageAmisProfil($tableau); 
-
+if (!empty($tableau)) {
+	affichageAmisProfil($tableau); 
+} else {
+	echo "vous n'avez pas d'amis";
+}
 
 
 ?>

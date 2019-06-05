@@ -2,16 +2,18 @@
 require('util.php');
 $mc=$_POST['motsClefs'];
 
-echo $_SESSION['login'];
 $db = connecterBDD();
 
-// mettre un split pour le cas ou on met "nom [espace] prenom" + un foreach TODO 
-$mots=explode(" ", $mc)
-if (!empty($mots)) {
-	$query="SELECT NOM,PRENOM,LOGIN,PHOTO FROM EISTI_BOOK_UTILISATEUR WHERE "
-	foreach ($mots as $m) {
-		$query.="LOGIN LIKE '%$m%' OR NOM LIKE '%$m%' OR PRENOM LIKE '%$m%'";
+// on sépare pour faire la recherche dans les cas où plusieurs mots clefs sont donnés
+$mots=explode(" ", $mc);
+$n=count($mots);
+$query="SELECT NOM,PRENOM,LOGIN,PHOTO FROM EISTI_BOOK_UTILISATEUR WHERE ";
+for ($i=0;$i<$n-1;$i++) {
+	$m=$mots[$i];
+	$query.="LOGIN LIKE '%$m%' OR NOM LIKE '%$m%' OR PRENOM LIKE '%$m%' OR ";
 	}
+$m=$mots[$n-1];
+$query.="LOGIN LIKE '%$m%' OR NOM LIKE '%$m%' OR PRENOM LIKE '%$m%';";
 $res = mysqli_query($db, $query) or die('Request error : '.$query);
 
 if (mysqli_num_rows($res)>0) {
@@ -35,8 +37,12 @@ if (!empty($tableau)) {
 		}
 		echo "<h4> ".$resultat['NOM']." ".$resultat['PRENOM']." ".$resultat['LOGIN']." </h4></a>";
 		
+		
+		// si on tombe sur son propre profil 
+		if ($_SESSION['login']==$resultat['LOGIN']) {
+			echo "C'est vous ! ";
 		// regarder si amis + boutons ajouter ou supprimer amitié 
-		if ( amis($_SESSION['login'],$resultat['LOGIN']) ) {
+		 } elseif ( amis($_SESSION['login'],$resultat['LOGIN']) ) {
 			// bonton supprimer de mes amis
 			echo "<input class='buton' type='button' value='Supprimer de mes amis' id='".$resultat['LOGIN']."' onclick='supprimerAmi(this)' />";
 		} else {
@@ -50,11 +56,6 @@ if (!empty($tableau)) {
 
 deconnecterBDD($db);
 
-
-
-//TODO 
-	// condition quand on fait une recherche et qu'on tombe sur son propre profil
-	//recherche par nom prenom
 
 
 

@@ -30,7 +30,7 @@ function getXhr() {
 }
 
 
-//
+// récupère la liste d'amis du profil connecté 
 function listeAmis() {
 	var xhr = getXhr();
   	xhr.open("POST","listeAmis.php",true) ;
@@ -46,6 +46,7 @@ function listeAmis() {
   	
 }
 
+// effectue la recherche dans la base de données (les différents mots clefs sont considérés entre les espaces)
 function recherche() {
 	var xhr = getXhr();
   	xhr.open("POST","rechercher.php",true) ;
@@ -60,6 +61,7 @@ function recherche() {
   	}	
 }
 
+// ajoute une amitié entre la personne connectée et la personne de login "nom"
 function ajouterAmi(nom) {
 	var xhr = getXhr();
   	xhr.open("POST","ajouterAmi.php",true) ;
@@ -75,6 +77,8 @@ function ajouterAmi(nom) {
   	
 }
 
+
+// supprime une amitié
 function supprimerAmi(login) {
 	var xhr = getXhr();
   	xhr.open("POST","supprimerAmi.php",true) ;

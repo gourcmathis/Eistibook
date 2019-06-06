@@ -249,12 +249,13 @@ function chargerListeAmis($login) {
 	}
 }
 
+
 // affiche sur la page de profil les infos des amis à partir de la liste d'amis
 function affichageAmisProfil($liste) {
 	foreach ($liste as $ami) {
-		echo "<a href='profil.php?perso=".$ami['LOGIN']."'><div class='ami'>";
-		if (isset($ami['photo'])) {
-			$src=$ami['photo'];
+		echo "<a href='profil.php?perso=".$ami['LOGIN']."'><div class='prof'>";
+		if (!empty($ami['PHOTO'])) {
+			$src=$ami['PHOTO'];
 			echo "<p><img class='photoprofil' src='".$src."'></img></p>";
 		} else {
 			echo "<p><img class='photoprofil' src='poulet.jpg'></img></p>";

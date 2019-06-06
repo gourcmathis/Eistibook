@@ -27,7 +27,7 @@ if (mysqli_num_rows($res)>0) {
 
 if (!empty($tableau)) {
 	foreach ($tableau as $resultat) {
-		echo "<div class=''>";
+		echo "<div class='prof'>";
 		echo "<a href='profil.php?perso=".$resultat['LOGIN']."'>";
 		if (!empty($resultat['PHOTO'])) {
 			$src=$resultat['PHOTO'];
@@ -44,7 +44,7 @@ if (!empty($tableau)) {
 		// regarder si amis + boutons ajouter ou supprimer amitié 
 		 } elseif ( amis($_SESSION['login'],$resultat['LOGIN']) ) {
 			// bonton supprimer de mes amis
-			echo "<input class='buton' type='button' value='Supprimer de mes amis' id='".$resultat['LOGIN']."' onclick='supprimerAmi(this)' />";
+			echo "<input class='buton' type='button' value='Supprimer de mes amis' id='".$resultat['LOGIN']."' onclick='supprimerAmi(this,0)' />";
 		} else {
 			// bouton ajouter à mes amis
 			echo "<input class='buton' type='button' value='Ajouter à mes amis'  id='".$resultat['LOGIN']."' onclick='ajouterAmi(this)' />";

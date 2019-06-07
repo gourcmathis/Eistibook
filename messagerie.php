@@ -1,7 +1,9 @@
 <?php
 require('util.php');
-echo "<script>if (confirm('Vous ne pouvez pas accéder à cette page. Voulez-vous retourner à la page de connexion ? ')) { 
-				document.location.replace('login.php'); }</script>";	
+if (!isset($_SESSION['login'])) {
+    echo "<script>if (confirm('Vous ne pouvez pas accéder à cette page. Voulez-vous retourner à la page de connexion ? ')) { 
+                document.location.replace('login.php'); }</script>";    
+}	
 // on vérifie toujours qu'il s'agit d'un membre qui est connecté
 if (!isset($_SESSION['login'])) {
 	// si ce n'est pas le cas, on le redirige vers l'accueil
@@ -89,11 +91,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
                         <a class="nonlien" href="messagerie.php"> Messagerie </a>
                     </li>                                      
                     
-                    <?php
-                    if ($acces=="mypage") {
-                    	echo "<li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=".$_SESSION['login']."'> Editer mon profil </a> </li>";
-                    }
-                    ?>
+                    <li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=".$_SESSION['login']."'> Editer mon profil </a> </li>
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
                     </li>

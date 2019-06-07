@@ -1,0 +1,27 @@
+.gauche{
+	width : 200px;
+}
+
+.menuli2 {
+	display:inline;
+ 	list-style-type:none;
+ 	/*padding-right: 15px;*/
+
+ 	padding:9px 0 9px 0;
+ 	padding-left: 10px;
+ 	padding-right: 160px;
+	font:bold 13px Arial;
+	background:#478bf9;
+	border-radius:2px;
+	width:100px;
+	border:none;
+	margin: 5px;
+	color: white;
+ }
+ .deb{
+ 	padding-bottom: 150px;
+ }
+
+ .rech{
+ 	padding-right: 190px;
+ }

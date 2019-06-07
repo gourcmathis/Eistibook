@@ -13,6 +13,9 @@ require('util.php');
           rel="stylesheet" type="text/css">
            <link href="./profil.css"
           rel="stylesheet" type="text/css">
+           <link href="./amis.css"
+          rel="stylesheet" type="text/css">
+
 </head>
 <script>
 // ajax
@@ -160,21 +163,27 @@ function supprimerAmi(login,n) {
 <div class="deb"></div>
 
 <!-- boutton afficher ma liste d'amis -->
+<div class="recherche">
+<h2 class="soustitre">Page de gestion des amitiés</h2>
 <div> 
-	<input class="buton" type="button" value="Afficher ma liste d'amis" onclick="listeAmis()">
+	<input class="menuli2" type="button" value="Afficher ma liste d'amis" onclick="listeAmis()">
 </div>
 
 <!-- barre de recherche et bouton valider -->
 <div>
-	<input type="text" value="" id="motsClefs" /><input class="buton" type="button" value="Rechercher" onclick="recherche()">
+	<span>Effectuer une recherche d'amis    </span>	<input type="text" placeholder="Effectuer une recherche"  value="" id="motsClefs" class="rech" /><input class="menuli" type="button" value="Rechercher" onclick="recherche()">
 
+</div>
 </div>
 
 <!--contient les résultats de la recherche ou de la liste d'amis -->
 <div id='results' class='milieu'></div>
 
 <!-- demandes d'amis en cours -->
-<div class='droit'> 
+
+
+
+<div class='gauche'> 
 	
 	<?php 
 	$db = connecterBDD();
@@ -240,7 +249,7 @@ function supprimerAmi(login,n) {
 					echo "<p><img class='photoprofil' src='poulet.jpg'></img></p>";
 				}
 				echo "<h4> ".$resultat['NOM']." ".$resultat['PRENOM']." ".$resultat['LOGIN']." </h4></a>";
-				echo "<input class='buton' type='button' value='annuler la demande' id='".$resultat['LOGIN']."' onclick='supprimerAmi(this,0)' />";
+				echo "<input class='buton' type='button' value='annuler la demande' id='".$resultat['LOGIN']."' onclick='supprimerAmi(this,0)' /> </div>";
 			}
 		}  else {
 			echo "aucune";

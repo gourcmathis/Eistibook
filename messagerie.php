@@ -91,7 +91,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
                         <a class="nonlien" href="messagerie.php"> Messagerie </a>
                     </li>                                      
                     
-                    <li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=".$_SESSION['login']."'> Editer mon profil </a> </li>
+                    <li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=<?php echo $_SESSION['login'];?>'> Editer mon profil </a> </li>
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
                     </li>

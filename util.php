@@ -98,19 +98,19 @@ function tryLogin($formdata) {
 	if (mysqli_num_rows($res)>0) {
 		$trouve=false;
 		while ($row = mysqli_fetch_assoc($res)) {
-			if ( $row['LOGIN']==$email && $row['MDP']==$motDePasse ) {
+			if ( $row['LOGIN']==$email && $row['MDP']==md5($motDePasse)) {
 				$trouve=true;
 				$req="SELECT TYPE FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='".$email."' AND MDP='".$motDePasse."'";
 				$reponse=mysqli_query($db,$req) or die("erreur : ".$req);
 				$donnees=mysqli_fetch_assoc($reponse);
 				$_SESSION['login']=$email;
-				$_SESSION['MDP']=$motDePasse;
+				$_SESSION['MDP']=$row['MDP'];
 				$_SESSION['type']=$donnees['TYPE'];
 			}	
 		}
 		if (!$trouve) {
 			// echo "vos identifiants sont faux !";
-			echo '<script> alert("Vos identifiants sont faux !") </script>';
+			echo '<script> alert("Vos identifiants sont faux ! ") </script>';
 		}
 	}
 	deconnecterBDD($db);

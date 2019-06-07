@@ -27,7 +27,7 @@ require("util.php");
 
 //Lors de la soumission des données du formulaire, insérer le nouvel abonné
 if (isset($_POST['nom']) && isset($_POST['prenom'])) {
-$tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST['ddn'],'email' => $_POST['email'],'promo' => $_POST['promo'],'password' => ($_POST['password']));
+$tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST['ddn'],'email' => $_POST['email'],'promo' => $_POST['promo'],'password' => md5(($_POST['password'])));
 
 	// ajoute le nouvel élève à la bdd
 	insertEleve($tab);

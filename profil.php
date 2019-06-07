@@ -27,7 +27,7 @@ require("util.php");
 <?php 
 
 if (empty($_GET) || !existe($_GET["perso"]) ) { 
-    echo "<script>if (confirm('Vous ne pouvez pas accéder à cette page. Voulez-vous retourner à la page de connexion ? ')) { 
+    echo "<script>if (confirm('Cette page n'existe pas. Voulez-vous retourner à la page de connexion ? ')) { 
 				document.location.replace('login.php'); }</script>";
 	$acces='none';
 
@@ -37,7 +37,8 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
 	
 	// vérifier que la personne connectée est un utilisateur (si visiteur ou session vide : message d'erreur)
 	if (empty($_SESSION) || $_SESSION['type']=='visiteur') {
-		echo "<script>alert(\"Vous ne pouvez pas accéder à cette page, veuillez vous connecter.\")</script>";
+        echo "<script>if (confirm('Vous ne pouvez pas accéder à cette page. Voulez-vous retourner à la page de connexion ? ')) { 
+				document.location.replace('login.php'); }</script>";		
 		$acces='none';
 		
 	} elseif ($_SESSION['type']=='admin') {

@@ -1,5 +1,9 @@
 <?php 
 require('util.php');
+if (!isset($_SESSION['login'])) {
+    echo "<script>if (confirm('Vous ne pouvez pas accéder à cette page. Voulez-vous retourner à la page de connexion ? ')) { 
+                document.location.replace('login.php'); }</script>";    
+}
 ?>
 
 <!DOCTYPE html >
@@ -139,18 +143,20 @@ function supprimerAmi(login,n) {
                         <a class="nonlien" href="amis.php"> Gérer mes amitiés</a>
                     </li>
 
-		          
-                    <li class="menuli">
-
-                        <a class="nonlien" href="messagerie.php">Messagerie </a>
-                    </li>
-                    <li class="menuli">
-                        <a class="nonlien" href="deco.php?action=logout">Me déconnecter</a>
-
-                    </li>
-
+		            <li class="menuli">
+                        <a class="nonlien" href="messagerie.php"> Messagerie </a>
+                    </li>                                      
+                    
+                    
+                  
+                    <li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=<?php echo $_SESSION['login'];?>'> Editer mon profil </a> </li>
+                    
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
+                    </li>
+
+                    <li class="menuli">
+                        <a class="nonlien" href="deco.php"> Me déconnecter </a>
                     </li>
 
                 </ul>

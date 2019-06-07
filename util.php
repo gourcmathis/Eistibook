@@ -236,17 +236,21 @@ function chargerInfos($login) {
 // récupère le nom prénom et photo de tous les amis du profil donné
 function chargerListeAmis($login) {
 	$db = connecterBDD();
-	// on selectionne tous les amis de login (c'est à dire les personnes avec qui il est amis et pas ceux qui sont amis avec lui)
-	$query="SELECT LOGIN, NOM, PRENOM, PHOTO FROM EISTI_BOOK_UTILISATEUR e WHERE e.ID_UTILISATEURS IN (SELECT ID_AMIS FROM AMIS WHERE ID_UTILISATEURS  = (SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'))";
+	// on selectionne tous les amis de login (c'est à dire les personnes avec qui il est amis)
+	$query="SELECT LOGIN, NOM, PRENOM, PHOTO, ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if (mysqli_num_rows($res)>0) {
 		$i=0;
 		while ($row = mysqli_fetch_assoc($res)) {
-			$tableau[$i]=$row;
-			$i++;
+
+			//on ne garde que ceux qui sont amis avec la personne 
+			if (amis($row['LOGIN'],$login)) {
+				$tableau[$i]=$row;
+				$i++;	
+			}
 		}
-		return $tableau;
 	}
+	return($tableau);	
 }
 
 // affiche sur la page de profil les infos des amis à partir de la liste d'amis

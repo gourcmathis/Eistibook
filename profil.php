@@ -27,7 +27,8 @@ require("util.php");
 <?php 
 
 if (empty($_GET) || !existe($_GET["perso"]) ) { 
-	echo "<script>alert(\"Cette page n'existe pas.\")</script>";
+    echo "<script>if (confirm('Cette page n'existe pas. Voulez-vous retourner à la page de connexion ? ')) { 
+				document.location.replace('login.php'); }</script>";
 	$acces='none';
 
 } else {
@@ -36,7 +37,8 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
 	
 	// vérifier que la personne connectée est un utilisateur (si visiteur ou session vide : message d'erreur)
 	if (empty($_SESSION) || $_SESSION['type']=='visiteur') {
-		echo "<script>alert(\"Vous ne pouvez pas accéder à cette page, veuillez vous connecter.\")</script>";
+        echo "<script>if (confirm('Vous ne pouvez pas accéder à cette page. Voulez-vous retourner à la page de connexion ? ')) { 
+				document.location.replace('login.php'); }</script>";		
 		$acces='none';
 		
 	} elseif ($_SESSION['type']=='admin') {
@@ -87,21 +89,20 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
 
 		            <li class="menuli">
                         <a class="nonlien" href="messagerie.php"> Messagerie </a>
-                    </li>
-
-                    <li class="menuli">
-                        <a class="nonlien" href="deco.php"> Me déconnecter </a>
-                    </li>
-
-                    <li  class="menuli">
-                        <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
-                    </li>
+                    </li>                                      
                     
                     <?php
                     if ($acces=="mypage") {
                     	echo "<li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=".$_SESSION['login']."'> Editer mon profil </a> </li>";
                     }
                     ?>
+                    <li  class="menuli">
+                        <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
+                    </li>
+
+                    <li class="menuli">
+                        <a class="nonlien" href="deco.php"> Me déconnecter </a>
+                    </li>
 
                 </ul>
             </div>

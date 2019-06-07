@@ -27,7 +27,8 @@ require("util.php");
 <?php 
 
 if (empty($_GET) || !existe($_GET["perso"]) ) { 
-	echo "<script>alert(\"Cette page n'existe pas.\")</script>";
+    echo "<script>if (confirm('Vous ne pouvez pas accéder à cette page. Voulez-vous retourner à la page de connexion ? ')) { 
+				document.location.replace('login.php'); }</script>";
 	$acces='none';
 
 } else {

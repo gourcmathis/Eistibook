@@ -12,9 +12,9 @@ require("util.php");
 
 
 // on vérifie que c'est le meme que le mot de passe actuel donné
-	if ($_POST['actuel']==$ancien) {
+	if (md5($_POST['actuel'])==$ancien) {
 		// si oui, on change le mot de passe dans la bdd
-		$query2="UPDATE EISTI_BOOK_UTILISATEUR SET MDP='".$_POST['nouveau']."' WHERE LOGIN='".$login."' ";
+		$query2="UPDATE EISTI_BOOK_UTILISATEUR SET MDP='".md5($_POST['nouveau'])."' WHERE LOGIN='".$login."' ";
 		$res2=mysqli_query($db, $query2) or die('Request error : '.$query2);
 	}
 

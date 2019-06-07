@@ -1,4 +1,3 @@
-
 <?php
 require('util.php');
 $pageDe=$_SESSION['login'];
@@ -87,7 +86,7 @@ if (isset($_POST['go']) && $_POST['go']=='Poster') {
                     </li>
 
 		            <li class="menuli">
-                        <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
+                        <a class="nonlien" href="amis.php"> Gérer mes amitiés </a>
                     </li>
 
 		          
@@ -211,28 +210,44 @@ $req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_
 // on compte le nombre de publi stockées dans la base de données
 $nb_publi = mysqli_num_rows($req);
 
-if ($nb_publi == 0) {
-    echo 'Aucune publication enregistrée.';
-}
-else {
+$presence_de_publi=false;
+
+if ($nb_publi != 0) {
     // si on a au moins une publi, on l'affiche
     while ($data = mysqli_fetch_array($req)) {
+		$nom=explode(" ",$data['auteur']);
+		$sql2="SELECT LOGIN FROM EISTI_BOOK_UTILISATEUR WHERE NOM='".$nom[1]."' AND PRENOM='".$nom[0]."'";
+		$req2 = mysqli_query($db, $sql2) or die('Erreur SQL !<br />'.$sql2.'<br />'.mysqli_error());
+		// si il n'y a aucun résultat, peut-être que la personne a été supprimée de la base de données 
+		if (mysqli_num_rows($req2)!=0) {
+			$res=mysqli_fetch_assoc($req2);
+			
+			//on n'affiche que les publications de ses amis
+			if (amis($res['LOGIN'],$_SESSION['login']) | $res['LOGIN']==$_SESSION['login']) {
+			
+				$presence_de_publi=true;
+			
+    			// on décompose la date
+    			sscanf($data['date'], "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
 
-    // on décompose la date
-    sscanf($data['date'], "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
-
-    // on affiche les résultats
-    echo '<div class="publication" >' ;
-    echo '<p class="nom" >' ;
-    echo '<br />Publication de : ' , htmlentities(trim($data['auteur'])) , '<br />';
-    echo 'Le : ' , $jour , '/' , $mois , '/' , $an , ' à ' , $heure , ':' , $min , ':' , $sec , '<br /><br />';
-    echo '</p>' ;
-    echo '' , nl2br(htmlentities(trim($data['texte']))) , '<br />';
-    echo "</div>";
+    			// on affiche les résultats
+    			echo '<div class="publication" >' ;
+    			echo '<p class="nom" >' ;
+    			echo '<br />Publication de : ' , htmlentities(trim($data['auteur'])) , '<br />';
+    			echo 'Le : ' , $jour , '/' , $mois , '/' , $an , ' à ' , $heure , ':' , $min , ':' , $sec , '<br /><br />';
+    			echo '</p>' ;
+    			echo '' , nl2br(htmlentities(trim($data['texte']))) , '<br />';
+    			echo "</div>";
+    		}
+    	}
     }
 }
-// on libère l'espace mémoire alloué à cette requête
+if (!$presence_de_publi) {
+	echo 'Aucune publication enregistrée.';
+}
+// on libère l'espace mémoire alloué aux requêtes
 mysqli_free_result ($req);
+mysqli_free_result ($req2);
 
 // on ferme la connexion à la base de données
 mysqli_close ($db);

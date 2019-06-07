@@ -29,7 +29,7 @@ require("util.php");
 if (empty($_GET) || !existe($_GET["perso"]) ) { 
 	echo "<script>alert(\"Cette page n'existe pas.\")</script>";
 	$acces='none';
-	// même message dans le cas où la page de profil recherchée n'existe pas ? 
+
 } else {
 	// page profil de qui : récup les identifiants dans la session
 	$pageDe=$_GET["perso"];
@@ -189,20 +189,9 @@ if (isset($_GET['valid'])) {
 echo "</div>";
 	
 
-// validation ou erreur après modification du profil 
-// echo "<div>";
-// if (isset($_GET['valid'])) {
-// 	if ($_GET['valid']) {
-// 		echo "Vos modifications ont bien été enrgistrées.";
-// 	} else {
-// 		echo "Vos modifications n'ont pas pu être réalisées. Vous pouvez réessayer ou contacter nos services si le problème subsiste.";
-// 	}
-// }	
-// echo "</div>";
-
 
 	
-// autres informations et publications	
+// autres informations 
 echo "	<div class='milieu'>";
 
 // introduction 
@@ -277,27 +266,27 @@ if ($acces<>"etranger") {
 		}
 		echo "</div>";	
 	}
+	echo "</div></div>";
+
+
 	
+
+	//publications de ce profil 
+	echo "<div class='milieu'>";
+	if ($acces=="mypage") {
+	echo "<h3> Mes publications récentes</h3>";
+	} else {
+	echo "<h3> Publications récentes de ".$infos['LOGIN']." </h3>";
+	}
+
+	chargerPubli_profil($infos['PRENOM']." ".$infos['NOM']);
+
+
+	echo "</div>";
+
 	
 } 
 	
-echo "</div></div>";
-
-
-	
-
-//publications de ce profil 
-echo "<div class='milieu'>";
-if ($acces=="mypage") {
-	echo "<h3> Mes publications récentes</h3>";
-} else {
-	echo "<h3> Publications récentes de ".$infos['LOGIN']." </h3>";
-}
-
-chargerPubli_profil($infos['PRENOM']." ".$infos['NOM']);
-
-
-echo "</div>";
 
 } 
 

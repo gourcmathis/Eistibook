@@ -31,7 +31,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
 	$db = connecterBDD();
 
 	// si tout a été bien rempli, on insère le message dans notre table SQL
-	$sql = 'INSERT INTO messages VALUES("", "'.$_SESSION['id'].'", "'.$_POST['destinataire'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['titre']).'", "'.mysqli_escape_string($db,$_POST['message']).'")';
+	$sql = 'INSERT INTO messages VALUES("", "'.$_SESSION['id'].'", "'.$_POST['destinataire'].'", "'.date("Y-m-d H:i:s").'", "'.mysqli_escape_string($db,$_POST['titre']).'", "'.mysqli_escape_string($db,$_POST['message']).'","","")';
 	mysqli_query($db,$sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error());
 
 	mysqli_close($db);

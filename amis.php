@@ -1,5 +1,5 @@
 <?php 
-session_start();
+require('util.php');
 ?>
 
 <!DOCTYPE html >
@@ -75,10 +75,10 @@ function ajouterAmi(nom) {
      		// On ne fait quelque chose que si on a tout reçu
     		// et que le serveur est ok
      		if (xhr.readyState == 4 && xhr.status == 200){
-     			if (  xhr.responseText == 1) {  alert("Vous avez un nouvel ami(e) :) !!!!"); }
+     			if (  xhr.responseText == 1) {  alert("Vous avez un(e) nouvel(le) ami(e) :) !!!!"); }
           else {
 
-          alert("Ceci n'a pas fonctionné");
+          alert("Vous ne pouvez pas demander cet utilisateur en ami \n (peut-être l'avez vous déjà fait ? Regardez dans vos demandes en cours à droite de l'écran)");
           }
          
      		}
@@ -88,19 +88,18 @@ function ajouterAmi(nom) {
 
 
 // supprime une amitié
-function supprimerAmi(login) {
+function supprimerAmi(login,n) {
 	var xhr = getXhr();
   	xhr.open("POST","supprimerAmi.php",true) ;
   	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
-  	xhr.send( "ami="+login.id); 
+  	xhr.send( "ami="+login.id+"&sens="+n); 
   	xhr.onreadystatechange = function() {
      		// On ne fait quelque chose que si on a tout reçu
     		// et que le serveur est ok
      		if (xhr.readyState == 4 && xhr.status == 200){
-          if (  xhr.responseText == 1) {  alert("Vous avez perdu un ami(e) :'(  !!!!"); }
+          if (  xhr.responseText == 1) {  alert("Vous avez perdu un(e) ami(e) :'(  !!!!"); }
           else {
-
-          alert("Ceci n'a pas fonctionné");
+          alert("Ceci n'a pas fonctionné"+xhr.responseText);
           }
      		}
   	}
@@ -150,11 +149,6 @@ function supprimerAmi(login) {
                     <li  class="menuli">
                         <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
                     </li>
-                    <?php
-                    
-                      echo "<li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=".$_SESSION['login']."'> Editer mon profil </a> </li>";
-                    
-                    ?>
 
                 </ul>
             </div>
@@ -177,8 +171,103 @@ function supprimerAmi(login) {
 </div>
 
 <!--contient les résultats de la recherche ou de la liste d'amis -->
-<div id='results'></div>
+<div id='results' class='milieu'></div>
+
+<!-- demandes d'amis en cours -->
+<div class='droit'> 
+	
+	<?php 
+	$db = connecterBDD();
+	// selectionne tous les gens avec qui on est amis 
+	$query1="SELECT LOGIN,PHOTO,NOM,PRENOM FROM EISTI_BOOK_UTILISATEUR WHERE ID_UTILISATEURS IN (SELECT ID_AMIS FROM AMIS WHERE ID_UTILISATEURS=(SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='".$_SESSION['login']."'))";
+	$res1 = mysqli_query($db, $query1) or die('Request error : '.$query1);
+	if (mysqli_num_rows($res1)>0) {
+		$i=0;
+		while ($row = mysqli_fetch_assoc($res1)) {
+			$envoyes[$i]=$row;
+			$i++;
+		}
+	} else {
+		$envoyes=array();
+	}
+	
+	//selectionne tous les gens qui sont amis avec nous 
+	$query2="SELECT LOGIN,PHOTO,NOM,PRENOM FROM EISTI_BOOK_UTILISATEUR WHERE ID_UTILISATEURS IN (SELECT ID_UTILISATEURS FROM AMIS WHERE ID_AMIS=(SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='".$_SESSION['login']."'))";
+	$res2 = mysqli_query($db, $query2) or die('Request error : '.$query2);
+	
+	if (mysqli_num_rows($res2)>0) {
+		$i=0;
+		while ($row = mysqli_fetch_assoc($res2)) {
+			$recus[$i]=$row;
+			$i++;
+		}
+	} else {
+		$recus=array();
+	}
+
+	
+	
+	
+	
+	
+	
+	$n=count($envoyes);
+	if ($n!=0) {
+		for ($i=0;$i<$n;$i++) {
+			$el=$envoyes[$i];
+			if (in_array($envoyes[$i],$recus)) {
+				unset($envoyes[$i]);
+				$j=array_search($el,$recus);
+				unset($recus[$j]);
+			}
+		}
+	} 
+	deconnecterBDD($db);
 
 
+	
+	?>
+	<h2>Mes demandes d'amis envoyées en attente </h2>
+	<?php 
+		if (!empty($envoyes)) {
+			foreach ($envoyes as $resultat) {
+				echo "<div class='prof'>";
+				echo "<a href='profil.php?perso=".$resultat['LOGIN']."'>";
+				if (!empty($resultat['PHOTO'])) {
+					$src=$resultat['PHOTO'];
+					echo "<p><img class='photoprofil' src='".$src."'></img></p>";
+				} else {
+					echo "<p><img class='photoprofil' src='poulet.jpg'></img></p>";
+				}
+				echo "<h4> ".$resultat['NOM']." ".$resultat['PRENOM']." ".$resultat['LOGIN']." </h4></a>";
+				echo "<input class='buton' type='button' value='annuler la demande' id='".$resultat['LOGIN']."' onclick='supprimerAmi(this,0)' />";
+			}
+		}  else {
+			echo "aucune";
+		}
+	?>
+	
+	<h2>Mes demandes d'amis reçues</h2>
+	<?php 
+		if (!empty($recus)) {
+			foreach ($recus as $resultat) {
+				echo "<div class='prof'>";
+				echo "<a href='profil.php?perso=".$resultat['LOGIN']."'>";
+				if (!empty($resultat['PHOTO'])) {
+					$src=$resultat['PHOTO'];
+					echo "<p><img class='photoprofil' src='".$src."'></img></p>";
+				} else {
+					echo "<p><img class='photoprofil' src='poulet.jpg'></img></p>";
+				}
+				echo "<h4> ".$resultat['NOM']." ".$resultat['PRENOM']." ".$resultat['LOGIN']." </h4></a>";
+				echo "<input class='buton' type='button' value='refuser' id='".$resultat['LOGIN']."' onclick='supprimerAmi(this,1)' />";
+				echo "<input class='buton' type='button' value='accepter'  id='".$resultat['LOGIN']."' onclick='ajouterAmi(this)' /></div>";
+			}
+		} else {
+			echo "aucune";
+		}
+	?>
+	
+</div>
 </body>
 </html>

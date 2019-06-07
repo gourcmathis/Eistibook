@@ -1,4 +1,3 @@
-
 <?php
 require('util.php');
 // on vérifie toujours qu'il s'agit d'un membre qui est connecté
@@ -81,7 +80,7 @@ if (isset($_POST['go']) && $_POST['go'] == 'Envoyer') {
                     </li>
 
 		            <li class="menuli">
-                        <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
+                        <a class="nonlien" href="amis.php"> Gérer mes amitiés </a>
                     </li>
 
 		            <li class="menuli">

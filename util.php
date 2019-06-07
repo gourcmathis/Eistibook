@@ -249,7 +249,8 @@ function chargerListeAmis($login) {
 				$i++;	
 			}
 		}
-	}	
+	}
+	return($tableau);	
 }
 
 // affiche sur la page de profil les infos des amis à partir de la liste d'amis

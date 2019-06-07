@@ -237,7 +237,7 @@ function chargerInfos($login) {
 function chargerListeAmis($login) {
 	$db = connecterBDD();
 	// on selectionne tous les amis de login (c'est à dire les personnes avec qui il est amis)
-	$query="SELECT LOGIN, NOM, PRENOM, PHOTO, ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR e WHERE e.ID_UTILISATEURS IN (SELECT ID_AMIS FROM AMIS WHERE ID_UTILISATEURS  = (SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login'))";
+	$query="SELECT LOGIN, NOM, PRENOM, PHOTO, ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);
 	if (mysqli_num_rows($res)>0) {
 		$i=0;

@@ -25,15 +25,8 @@ require('util.php');
 	$type=$infos['TYPE'];
 	$mdp=$infos['MDP'];
 
+	$sexe=$infos['SEXE'];
 	
-	// cas du sexe pas forcément défini (si il était déjà défini il n'est pas modifiable)
-	if (isset($_POST['genre'])) {
-		$sexe=$_POST['genre'];
-	} elseif (isset($infos['SEXE'])) {
-		$sexe=$infos['SEXE'];
-	} else {
-		$sexe="";
-	}
 
 
 // Récupération photo de profil

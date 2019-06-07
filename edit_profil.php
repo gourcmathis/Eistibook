@@ -121,15 +121,7 @@ if ($acces<>"no") {
 			<h3> ".$infos['NOM']." </h3>
     			<h4> ".$infos['PRENOM']."</h4>
     			<p>Né le ".$infos['NAISSANCE']."</p>";
-    		if (!empty($infos["SEXE"])) {
-    			echo "<p> Genre : ".$infos["SEXE"]."<p>";
-    		} else {
-    			echo "<p> Votre genre n'est pas défini. </p>";
-    		?>	
-    			<label><input type='radio' class='form-control' id='Homme' name='genre' />Homme</label>
-    			<label><input type='radio' class='form-control' id='Femme' name='genre' />Femme</label>
-    			<label><input type='radio' class='form-control' id='Autre' name='genre' />Autre</label> 
-    		<?php } ?>  	
+    		 ?>  	
     	</div>
     	
     	

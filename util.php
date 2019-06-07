@@ -242,11 +242,8 @@ function chargerListeAmis($login) {
 	if (mysqli_num_rows($res)>0) {
 		$i=0;
 		while ($row = mysqli_fetch_assoc($res)) {
-			
-			$q="SELECT * FROM AMIS WHERE ID_AMIS=(SELECT ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$login') AND ID_UTILISATEURS='".$row['ID_UTILISATEURS']."'";
-			$r = mysqli_query($db, $q) or die('Request error : '.$q);
-			// si il n'y a aucune réponse, c'est que l'amitié n'est pas récipoque (triste)
-			if (mysqli_num_rows($r)==0) {
+			//on ne garde que ceux qui sont amis avec la personne 
+			if (amis($row['LOGIN'],$login)) {
 				$tableau[$i]=$row;
 				$i++;	
 			}

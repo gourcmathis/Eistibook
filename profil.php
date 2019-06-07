@@ -89,21 +89,20 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
 
 		            <li class="menuli">
                         <a class="nonlien" href="messagerie.php"> Messagerie </a>
-                    </li>
-
-                    <li class="menuli">
-                        <a class="nonlien" href="deco.php"> Me déconnecter </a>
-                    </li>
-
-                    <li  class="menuli">
-                        <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
-                    </li>
+                    </li>                                      
                     
                     <?php
                     if ($acces=="mypage") {
                     	echo "<li  class='menuli'> <a class='nonlien' href='edit_profil.php?perso=".$_SESSION['login']."'> Editer mon profil </a> </li>";
                     }
                     ?>
+                    <li  class="menuli">
+                        <a class="nonlien" href="http://www.eisti.fr"> EISTI </a>
+                    </li>
+
+                    <li class="menuli">
+                        <a class="nonlien" href="deco.php"> Me déconnecter </a>
+                    </li>
 
                 </ul>
             </div>

@@ -24,21 +24,28 @@
 
 <?php
 require("util.php");
+if (isset($_POST['email'])) {
+    # code...
 
 //Lors de la soumission des données du formulaire, insérer le nouvel abonné
-if (isset($_POST['nom']) && isset($_POST['prenom'])) {
+$db = connecterBDD();
+$sql = 'SELECT LOGIN FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN="'.$_POST['email'].'"';
+$req = mysqli_query($db, $sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
+
+if (isset($_POST['nom']) && isset($_POST['prenom']) && mysqli_num_rows($req)==0) {
 $tab=array('nom' => $_POST['nom'],'prenom'  => $_POST['prenom'],'ddn' => $_POST['ddn'],'email' => $_POST['email'],'promo' => $_POST['promo'],'password' => md5(($_POST['password'])));
 
 	// ajoute le nouvel élève à la bdd
 	insertEleve($tab);
 
 	
-	echo "<script>document.location.replace('login.php')</script>";}
+	echo "<script>document.location.replace('login.php')</script>";}else {
+        echo"<script>alert('Cet email est déjà utilisé')</script>";};
 
 
+
+};
 ?>
-
-
 <!-- <h1 class="titre"> EISTI - BOOK </h1> -->
 
 

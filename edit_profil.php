@@ -61,7 +61,7 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
                     </li>
 
 		            <li class="menuli">
-                        <a class="nonlien" href="amis.php"> Gérer mes amitiés amis </a>
+                        <a class="nonlien" href="amis.php"> Gérer mes amitiés </a>
                     </li>
 
 		            <li class="menuli">
@@ -131,7 +131,7 @@ if ($acces<>"no") {
     	<div>
     		<h3>Votre promotion</h3>
 
-			<p>Vous avez redoublé ? Vous pouvez ici changer votre promotion. Séléctionnez votre nouvelle promotion : </p>
+			<p>Vous avez redoublé ? Vous pouvez ici changer votre promotion. Sélectionnez votre nouvelle promotion : </p>
                             <input type="number" class="form-control" id="promo" name="promo" value="<?php echo $infos['PROMOTION']; ?>"  >
 
 		</div> 		
@@ -190,13 +190,13 @@ if ($acces<>"no") {
 
 	<!-- diplome -->
 	<div>
-		<h3>Votre dimplome</h3>
+		<h3>Votre diplôme</h3>
 			<?php
 			if (!empty($infos['DIPLOME'])) {
-				echo "<p>Vous avez optenu un nouveau diplome ? Mettez votre profil à jour : </p> ";
+				echo "<p>Vous avez obtenu un nouveau diplôme ? Mettez votre profil à jour : </p> ";
 				$diplo=$infos['DIPLOME'];
 			} else {
-				echo "<p>Indiquez ici le plus haut diplome que vous avez optenu : </p>";
+				echo "<p>Indiquez ici le plus haut diplôme que vous avez obtenu : </p>";
 				$diplo="";
 			} 
 			?>
@@ -241,13 +241,13 @@ if ($acces<>"no") {
 	
 	<!-- ville -->
 	<div>
-		<h3>Votre Ville</h3>
+		<h3>Votre ville</h3>
 			<?php
 			if (!empty($infos['VILLE'])) {
 				echo "<p>Vous venez de déménager ? Dites-le nous : </p> ";
 				$ville=$infos['VILLE'];
 			} else {
-				echo "<p>Votre profil ne contient pas d'adresse, indiquez-la pour renconter les professionnels présents près de chez vous :</p>";
+				echo "<p>Votre profil ne contient pas d'adresse, indiquez-la pour rencontrer les professionnels présents près de chez vous :</p>";
 				$ville="";
 			} 
 			?>
@@ -352,7 +352,7 @@ if ($acces<>"no") {
 			if (!empty($outils)) {
 				echo "<p>Vous avez appris une nouvelle langue ? </p> ";
 			} else {
-				echo "<p>Vous ne parlez aucune langue ? Indiquez au moins votre langue maternelle. </p>";
+				echo "<p>Vous ne maitrisez aucun outil ? :( </p>";
 			}
 			foreach ($optOutils as $opt) {
 				$valeur=$opt[0];

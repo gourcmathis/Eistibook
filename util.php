@@ -247,10 +247,13 @@ function chargerListeAmis($login) {
 			if (amis($row['LOGIN'],$login)) {
 				$tableau[$i]=$row;
 				$i++;	
+
 			}
 		}
+
 	}
 	return($tableau);	
+	
 }
 
 // affiche sur la page de profil les infos des amis à partir de la liste d'amis

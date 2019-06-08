@@ -189,7 +189,7 @@ function supprimerAmi(login,n) {
 
 
 
-<div class='gauche'> 
+<div class='gauche2'> 
 	
 	<?php 
 	$db = connecterBDD();

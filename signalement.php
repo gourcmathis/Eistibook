@@ -18,7 +18,7 @@ if ($_SESSION['type']<>'admin') {			//Si l'utilisateur n'a pas le droit d'accéd
   echo "<div class='error'>Vous ne pouvez pas accéder à cette page. </div>";
   $access="none";
   echo "<br>";
-  echo "<a href='profil.php?perso=".$_SESSION['login']."'>Retourner sur mon profil</a>";  
+  echo "<a class='bouton_admin' href='profil.php?perso=".$_SESSION['login']."'>Retourner sur mon profil</a>";  
 } else {
   $access="all";
 }
@@ -27,7 +27,7 @@ if ($_SESSION['type']<>'admin') {			//Si l'utilisateur n'a pas le droit d'accéd
 if ($access=="all") {
 	echo "<h1 class='titre'> Liste des signalements </h1>
 
-<a href='admin.php'>Retour à la page administrateur</a>
+<a class='bouton_admin' href='admin.php'>Retour à la page administrateur</a>
 <br>
 <br>";
 

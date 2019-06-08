@@ -1,7 +1,7 @@
 <?php
 include("admin_fonctions.php");
 
-/* Chaque information à modifier n'est pas affichée de la même façon. Exemple : au lieu de laisser un champ de texte à remplir pour le choix du 'niveau d'accès' d'un utilisateur, un champ de type radio est affiché avec les trois choix disponibles : visiteur, abonne ou admin. */
+/* Chaque information à modifier n'est pas affichée de la même façon. Exemple : au lieu de laisser un champ de texte à remplir pour le choix du sexe d'un utilisateur, un champ de type radio est affiché avec les trois choix disponibles : Homme, Femme et Autre. */
 
 
 $id_util=$_POST['id_util'];   //Récupère l'ID de l'utilisateur sélectionné 

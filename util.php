@@ -236,6 +236,7 @@ function chargerInfos($login) {
 // récupère le nom prénom et photo de tous les amis du profil donné
 function chargerListeAmis($login) {
 	$db = connecterBDD();
+	$tableau=[];
 	// on selectionne tous les amis de login (c'est à dire les personnes avec qui il est amis)
 	$query="SELECT LOGIN, NOM, PRENOM, PHOTO, ID_UTILISATEURS FROM EISTI_BOOK_UTILISATEUR";
 	$res = mysqli_query($db, $query) or die('Request error : '.$query);

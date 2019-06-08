@@ -32,9 +32,10 @@ if ($_SESSION['type']<>'admin') {                   //Si l'utilisateur n'a pas l
 
 if ($access=='all') {
   echo "<h1 class='titre'> Page Administrateur </h1>
-<a href='deco.php'> Me déconnecter </a>
+<a class='bouton_admin' href='deco.php'> Me déconnecter </a>
 <br>
-<a href='signalement.php'>Voir les signalements</a>
+<br>
+<a class='bouton_admin' href='signalement.php'>Voir les signalements</a>
 
 <h2> <u>Liste de tous les utilisateurs</u> </h2>";
 
@@ -51,9 +52,9 @@ $tmp='"menu"';
 
 echo "<h2> <u>Choix d'une action pour cet élève</u> </h2>
 <hr>
-  <input type='button' name='info' value='Voir informations personnelles' onclick='execInfo()'>
+  <input type='button' style='width:20%' class='bouton_admin' name='info' value='Voir informations personnelles' onclick='execInfo()'>
   <br><span id='affichage'></span><hr>";
- echo "<input type='button' name='modif' value='Modifier informations personnelles' onclick='reveal($tmp)'>";
+ echo "<input type='button' style='width:20%' class='bouton_admin' name='modif' value='Modifier informations personnelles' onclick='reveal($tmp)'>";
   echo ' <span id="menu" hidden>';
 
 
@@ -67,7 +68,7 @@ $tmp='"remplace"';
 echo "<select id='cle' name='cle' onchange='execPrint();reveal($tmp)'>"; 
                                                   
   for ($i=1; $i <20 ; $i++) {                             //Affichage d'une liste déroulante contenant tous les types d'information qu'il est possible de modifier. On initialise l'itérateur à 1 car on ne veut pas la première colonne 'type' ( on ne modifie pas le type d'un utilisateur).
-    if ($i<>14) {
+    if (($i<>14)&&($i<>10)) {
       echo '<option>'.$key_tab[$i]."</option>";
     } 
 }
@@ -88,21 +89,21 @@ echo "<span id='nouveau'>  </span>
 
 
   <hr>
-  <input type='button' name='delete' value='Supprimer ce compte' onclick='supprAccount()'>
+  <input type='button' style='width:20%' class='bouton_admin' name='delete' value='Supprimer ce compte' onclick='supprAccount()'>
   <br>
   <span id='del'></span>
   <hr>";
 
-echo "<input type='button' name='ban' value='Bannir ce compte' onclick='changeBan(1)'>
+echo "<input type='button' style='width:20%' class='bouton_admin' name='ban' value='Bannir ce compte' onclick='changeBan(1)'>
   <br>
   <span id='ban'></span>
   <hr>";
 
-echo "<input type='button' name='deban' value='Retirer le bannissement de ce compte' onclick='changeBan(0)'>
+echo "<input type='button' style='width:20%' class='bouton_admin' name='deban' value='Retirer le bannissement de ce compte' onclick='changeBan(0)'>
   <br>
   <hr>";
 
-echo "<input type='button' name='mesag' value='Consulter la messagerie de cet utilisateur' onclick='getMessagerie()'>
+echo "<input type='button' style='width:20%' class='bouton_admin  ' name='mesag' value='Consulter la messagerie de cet utilisateur' onclick='getMessagerie()'>
   <br>
   <span id='msg'></span>
   <hr>";

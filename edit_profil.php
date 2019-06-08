@@ -13,6 +13,8 @@ require("util.php");
           rel="stylesheet" type="text/css">
            <link href="./profil.css"
           rel="stylesheet" type="text/css">
+          <link href="./editprof.css"
+          rel="stylesheet" type="text/css">
 </head>
 
 
@@ -41,7 +43,7 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
 ?>
 
 <body>
-<h1 class="titre"> Modifier mon profil  </h1>
+<div class="entete">
 <img class="logo" src="EISTIB6.png">
 
 
@@ -82,7 +84,11 @@ if (empty($_GET) || !existe($_GET["perso"]) ) {
     </div>
 </div>
 
+</div>
 
+<div class="deb"></div>
+
+<h2 class="soustitre"> Editer mon profil </h2>
 
 
 
@@ -104,7 +110,7 @@ if ($acces<>"no") {
 
 <!-- Mot de passe  -->
 <div class='droit'>
-	<a class="nonlien" href="mdp.php?perso=<?php echo $_SESSION['login']; ?>"> Modifier le mot de passe </a>
+	<a class="nonlien2" href="mdp.php?perso=<?php echo $_SESSION['login']; ?>"> Modifier le mot de passe </a>
 </div>
 
 
@@ -145,7 +151,7 @@ if ($acces<>"no") {
 <div>
 	
 		<label for="photo">Icône du fichier (JPG, PNG ou GIF | max. 1Mo) :</label><br />
-     	<input type="file" name="photo" id="photo"  /><br />
+     	<input class="photoset" type="file" name="photo" id="photo"  /><br />
      	<!-- <input type="submit" name="submit" id="env" value="Envoyer" /> -->
 	
 

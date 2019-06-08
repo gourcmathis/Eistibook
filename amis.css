@@ -1,8 +1,8 @@
 .gauche2{
-	width : 250px;
+	width : 30%;
 	float: left;
- 	margin-right: 10px;
- 	border-style: double;
+ 	margin: 10px;
+ 	
  	padding: 10px;
  	/*max-width: 100px;*/
  	
@@ -32,6 +32,15 @@
  	padding-right: 190px;
  }
 
- .milieu {
- 	float: fixed;
+ .milieu2 {
+ 	margin-right: 260px;
+ 	margin-left: 45%;
+ 	padding: 10px;
+
+ }
+ .prof{
+ 	border-style: double;
+ 	padding: 10px;
+ 	margin-bottom: 10px;
+ 	border-width: 3px;
  }

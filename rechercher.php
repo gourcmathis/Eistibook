@@ -26,6 +26,7 @@ if (mysqli_num_rows($res)>0) {
 
 
 if (!empty($tableau)) {
+	echo "<h2> Ma recherche d'amis </h2>";
 	foreach ($tableau as $resultat) {
 		echo "<div class='prof'>";
 		echo "<a href='profil.php?perso=".$resultat['LOGIN']."'>";

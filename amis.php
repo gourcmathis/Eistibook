@@ -82,7 +82,7 @@ function ajouterAmi(nom) {
      		// On ne fait quelque chose que si on a tout reçu
     		// et que le serveur est ok
      		if (xhr.readyState == 4 && xhr.status == 200){
-     			if (  xhr.responseText == 1) {  alert("Vous avez un(e) nouvel(le) ami(e) :) !!!!"); }
+     			if (  xhr.responseText == 1) {  alert("Demande d'ami(e) bien envoyée"); }
           else {
 
           alert("Vous ne pouvez pas demander cet utilisateur en ami \n (peut-être l'avez vous déjà fait ? Regardez dans vos demandes en cours à droite de l'écran)");
@@ -183,13 +183,13 @@ function supprimerAmi(login,n) {
 </div>
 
 <!--contient les résultats de la recherche ou de la liste d'amis -->
-<div id='results' class='milieu'></div>
+<div id='results' class='gauche2'> </div>
 
 <!-- demandes d'amis en cours -->
 
 
 
-<div class='gauche2'> 
+<div class='milieu2'> 
 	
 	<?php 
 	$db = connecterBDD();

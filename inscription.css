@@ -1,4 +1,3 @@
-
 /*[required] {
    border: 2px dotted orange;
 }*/
@@ -90,7 +89,19 @@ textarea {
 	/*margin-left: 35px;*/
 	color: white;
  }
-
+ 
+   .bouton_admin {
+ 	padding:9px 0 9px 0;
+ 	padding-left: 10px;
+ 	padding-right: 10px;
+	font:bold 13px Arial;
+	background:#478bf9;
+	border-radius:2px;
+	width:20%;
+	border:none;
+	color: white;
+ }
+ 
  ul {
  	padding: 0px;
  	margin-top: 25px;

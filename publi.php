@@ -166,7 +166,7 @@ if (!empty($amis)) {
     if ($acces=="mypage") {
         echo "Vous n'avez pas d'amis :( <br/> Vous pouvez retrouver des connaissances dans l'onglet 'gérer mes amitiés'";
     } else {
-        echo "Cet utilisateur n'a pas d'amis enregistré.";
+        echo "Cet utilisateur n'a pas d'ami enregistré.";
     } 
 }
 echo "</div>";

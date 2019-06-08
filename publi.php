@@ -35,7 +35,7 @@ if (isset($_POST['go']) && $_POST['go']=='Poster') {
 		// on ferme la connexion à la base de données
 		mysqli_close($db);
 
-		// on redirige vers la page d'accueil du site (attention, cette redirection ne fonctionne qui si vous avez placé cette page dans un répertoire à partir de la racine du site). Si ce n'est pas le cas, veuillez entrer ici le bon chemin d'accès afin de retomber sur la page d'accueil du site.
+		// on redirige vers la page d'accueil du site (attention, cette redirection ne fonctionne que si vous avez placé cette page dans un répertoire à partir de la racine du site). Si ce n'est pas le cas, veuillez entrer ici le bon chemin d'accès afin de retomber sur la page d'accueil du site.
 		header('Location: ./publi.php');
 		// on termine le script courant
 		exit();
@@ -164,7 +164,7 @@ if (!empty($amis)) {
     affichageAmisProfil($amis);
 } else { 
     if ($acces=="mypage") {
-        echo "Vous n'avez pas d'amis :( <br/> Vous pouvez retrouver des connaissances dans l'onglet 'gérer mes amis'";
+        echo "Vous n'avez pas d'amis :( <br/> Vous pouvez retrouver des connaissances dans l'onglet 'gérer mes amitiés'";
     } else {
         echo "Cet utilisateur n'a pas d'amis enregistré.";
     } 

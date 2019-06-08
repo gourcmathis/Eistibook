@@ -25,6 +25,7 @@ require("util.php");
 
 
 <?php 
+$req="SELECT TYPE FROM EISTI_BOOK_UTILISATEUR WHERE TYPE='".$email."' AND MDP='".$motDePasse."'";
 
 if (empty($_GET) || !existe($_GET["perso"]) ) { 
     echo "<script>if (confirm('Cette page n'existe pas. Voulez-vous retourner à la page de connexion ? ')) { 

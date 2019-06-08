@@ -19,9 +19,10 @@
 
 <?php
     include("admin_fonctions.php");
+   
 
 
-if ($_SESSION['type']<>'admin') {                   //Si l'utilisateur n'a pas le droit d'accéder à la page admin, on affiche un message d'erreur et on l'invite à retourner sur son profil.
+if ($_SESSION['type']<>"admin") {                   //Si l'utilisateur n'a pas le droit d'accéder à la page admin, on affiche un message d'erreur et on l'invite à retourner sur son profil.
   echo "<div class='error'>Vous ne pouvez pas accéder à cette page. </div>";
   $access="none";
   echo "<br>";
@@ -29,6 +30,8 @@ if ($_SESSION['type']<>'admin') {                   //Si l'utilisateur n'a pas l
 } else {
   $access="all";
 }
+
+
 
 if ($access=='all') {
   echo "<h1 class='titre'> Page Administrateur </h1>

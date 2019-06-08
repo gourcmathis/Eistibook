@@ -94,13 +94,12 @@ function tryLogin($formdata) {
 	$query = "SELECT LOGIN, MDP FROM EISTI_BOOK_UTILISATEUR ";
 	
 	$res=mysqli_query($db,$query) or die('Request error : '.$query);
-	
 	if (mysqli_num_rows($res)>0) {
 		$trouve=false;
 		while ($row = mysqli_fetch_assoc($res)) {
 			if ( $row['LOGIN']==$email && $row['MDP']==md5($motDePasse)) {
 				$trouve=true;
-				$req="SELECT TYPE FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='".$email."' AND MDP='".$motDePasse."'";
+				$req="SELECT TYPE FROM EISTI_BOOK_UTILISATEUR WHERE LOGIN='$email' AND MDP='".md5($motDePasse)."'";
 				$reponse=mysqli_query($db,$req) or die("erreur : ".$req);
 				$donnees=mysqli_fetch_assoc($reponse);
 				$_SESSION['login']=$email;

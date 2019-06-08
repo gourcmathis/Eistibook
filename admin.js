@@ -139,7 +139,7 @@ function supprAnnex() {                     //Permet de supprimer une informatio
 
 function supprAccount() {                           //Supprime le compte de l'utilisateur sélectionné
   xhr = getXhr();
-  id_util=document.getElementById('eleve').value;      //Récupération de l'id de l'utilisateur
+  id_util=document.getElementById('eleve').value;      //Récupération de l'id de l'utilisateur qui doit être supprimé
   xhr.onreadystatechange = function sup() {
     if (xhr.readyState == 4 && xhr.status == 200){
       res=xhr.responseText; 
@@ -177,4 +177,17 @@ function getMessagerie() {  // récupère le contenu de la messagerie de l'utili
   xhr.open("POST","admin_messagerie.php",true);
   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
   xhr.send("id_util="+id_util);
+}
+
+function supprMsg(idMsg) {           //Supprime le message ayant l'id qui correspond à l'entier entré en paramètre
+  xhr = getXhr();
+  xhr.onreadystatechange = function sup() {
+    if (xhr.readyState == 4 && xhr.status == 200){
+      res=xhr.responseText; 
+      document.getElementById('del_msg').innerHTML="  <b>   Ce message a été supprimé !</b>";
+       }
+    }
+  xhr.open("POST","admin_deletemsg.php",true);
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+  xhr.send("idMsg="+idMsg);
 }
